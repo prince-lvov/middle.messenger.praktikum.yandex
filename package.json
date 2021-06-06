@@ -2,7 +2,7 @@
   "name": "messenger",
   "version": "1.0.0",
   "scripts": {
-    "start": "node ./js/server.js",
+    "start": "concurrently \"parcel pug/index.pug pug/index2.pug pug/login.pug pug/chat-page.pug\" \"node ./js/server.js\"",
     "watch": "parcel serve --host 0.0.0.0 pug/index.pug pug/login.pug pug/chat-page.pug",
     "dev": "parcel pug/index.pug pug/index2.pug pug/login.pug pug/chat-page.pug --no-cache",
     "build": "parcel build pug/index.pug pug/index2.pug pug/login.pug pug/chat-page.pug"
