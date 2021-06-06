@@ -1,0 +1,23 @@
+extends include/layout.pug
+
+block styles
+	link(rel="stylesheet" href="../sass/chatPage.sass")
+
+block content
+	.site-wrapper.main-view
+		aside
+			include include/sidebar.pug
+		main
+			.chat-messages--parent
+				.chat-messages--header
+					.smile
+					.name Игорь
+					.chat-menu
+						img(src="../images/chat-actions/chat-menu.svg" alt="")
+
+				.chat-messages--input-area
+					.clip
+						img(src="../images/chat-actions/clip.svg" alt="")
+					input(type="text" placeholder="Сообщение" name="newMessage")
+					.arrow
+						img(src="../images/chat-actions/send-arrow.svg" alt="")
