@@ -4,7 +4,7 @@
   "scripts": {
     "start": "concurrently \"parcel pug/index.pug pug/index2.pug pug/login.pug pug/chat-page.pug\" \"node ./js/server.js\"",
     "watch": "parcel serve --host 0.0.0.0 pug/index.pug pug/login.pug pug/chat-page.pug",
-    "dev": "parcel pug/index.pug pug/index2.pug pug/login.pug pug/chat-page.pug --no-cache",
+    "dev": "parcel pug/index.pug pug/index2.pug pug/login.pug pug/chat-page.pug --port 3000",
     "build": "parcel build pug/index.pug pug/index2.pug pug/login.pug pug/chat-page.pug"
   },
   "author": "",
