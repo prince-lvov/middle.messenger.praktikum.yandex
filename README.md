@@ -1,4 +1,6 @@
+Ссылка на Pull request: https://github.com/prince-lvov/middle.messenger.praktikum.yandex/pull/5
 Домен из Netlify:https://youthful-torvalds-a84faf.netlify.app
+https://www.figma.com/file/3tu2tLzr8jBasqiMk3vtJ7/Messenger%2B?node-id=96%3A343
 ### Ветка, в которой делаете задания спринта, должна называться sprint_i, где i - номер спринта. Не переименовывайте её.
 
 ### Откройте pull request в ветку main из ветки, где вы разрабатывали проект, и добавьте ссылку на этот pr в README.md в ветке main. Название pull request может быть любое.
