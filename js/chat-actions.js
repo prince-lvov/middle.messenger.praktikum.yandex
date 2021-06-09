@@ -8,7 +8,7 @@ function initTopChatMenuEvents() {
 	}
 
 	topMenuTrigger.addEventListener('click', () => {
-		topMenuTrigger.classList.toggle('open', !topMenuTrigger.classList.contains('open'))
+		topMenuTrigger.classList.toggle('open')
 	})
 
 	const subMenuElements = topSubMenu.querySelectorAll('[data-action]')
@@ -60,6 +60,10 @@ function initTopChatMenuEvents() {
 	})
 
 	// Разные способы закрытия попапа
+	actionPopup.addEventListener('click', () => {
+		actionPopup.classList.remove('open')
+	})
+
 	const actionPopupCloseLink = actionPopup.querySelector('.cancel')
 	if (!actionPopupCloseLink) {
 		return false
@@ -74,10 +78,6 @@ function initTopChatMenuEvents() {
 		return false
 	}
 	popupWindow.addEventListener('click', event => event.stopPropagation())
-
-	actionPopup.addEventListener('click', () => {
-		actionPopup.classList.remove('open')
-	})
 }
 
 // Обработка формы в попапе
@@ -125,7 +125,7 @@ function initBottomChatMenuEvents() {
 	}
 
 	bottomMenuTrigger.addEventListener('click', () => {
-		bottomMenuTrigger.classList.toggle('open', !bottomMenuTrigger.classList.contains('open'))
+		bottomMenuTrigger.classList.toggle('open')
 	})
 }
 

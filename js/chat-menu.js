@@ -5,7 +5,7 @@ function initTopChatMenuEvents() {
 	}
 
 	topMenuTrigger.addEventListener('click', () => {
-		topMenuTrigger.classList.toggle('open', !topMenuTrigger.classList.contains('open'))
+		topMenuTrigger.classList.toggle('open')
 	})
 }
 
@@ -16,7 +16,7 @@ function initBottomChatMenuEvents() {
 	}
 
 	bottomMenuTrigger.addEventListener('click', () => {
-		bottomMenuTrigger.classList.toggle('open', !bottomMenuTrigger.classList.contains('open'))
+		bottomMenuTrigger.classList.toggle('open')
 	})
 }
 

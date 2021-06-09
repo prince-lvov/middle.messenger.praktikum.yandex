@@ -47,7 +47,8 @@ function findContact() {
 
 	searchResultsParent.classList.add('visible')
 
-	const found = contacts.filter(contact => contact.name.toLocaleLowerCase().includes(searchText.toLocaleLowerCase()))
+	const lowerTextToFind = searchText.toLocaleLowerCase()
+	const found = contacts.filter(contact => contact.name.toLocaleLowerCase().includes(lowerTextToFind))
 
 	// Вывод результатов
 	found.forEach(contact => {
