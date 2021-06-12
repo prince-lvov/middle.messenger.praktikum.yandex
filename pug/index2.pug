@@ -1,0 +1,12 @@
+extends include/layout.pug
+
+block styles
+	link(rel="stylesheet" href="../sass/index.sass")
+
+block content
+	.site-wrapper.main-view
+		aside
+			include include/sidebar.pug
+		main.centered
+			img(src="../images/chat.svg")
+			.info Выберите чат, чтобы отправить сообщение
