@@ -1,0 +1,35 @@
+.search-results
+	display: none
+	margin-top: 10px
+	padding: 0 10px
+	overflow-y: auto
+	overscroll-behavior: contain
+	height: calc(100% - var(--asideHeaderheight) - 5px)
+
+	&.visible
+		display: block
+
+		& ~ .chat-list
+			display: none
+
+	.search-result
+		display: grid
+		grid-template-columns: 45px 1fr
+		grid-template-rows: auto
+		gap: 0 10px
+
+		&--name
+			display: flex
+			align-items: center
+
+		&--smile
+			@include Smile
+			align-self: center
+
+		&--separate-line
+			background-color: rgba(0, 0, 0, 0.1)
+			height: 2px
+			margin: 10px 0
+
+		&--wrapper:last-child .search-result--separate-line
+			display: none

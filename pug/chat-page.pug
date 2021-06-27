@@ -1,0 +1,13 @@
+extends include/layout.pug
+
+block styles
+	link(rel="stylesheet" href="../sass/chatPage.sass")
+
+block content
+	.site-wrapper.main-view
+		aside
+			include include/sidebar.pug
+		main
+			include templates/chat-page.pug
+
+		//- script(src="../js/chat-actions.js")

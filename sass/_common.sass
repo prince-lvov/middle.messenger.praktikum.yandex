@@ -1,0 +1,85 @@
+@import '../fonts/noto.css'
+
+*
+	box-sizing: border-box
+	padding: 0
+	margin: 0
+	font-family: 'Noto Sans'
+
+	&::after,
+	&::before
+		box-sizing: border-box
+
+a
+	text-decoration: underline
+	color: inherit
+	outline: none
+
+	&:hover, &:active, &:focus
+		text-decoration: none
+		color: inherit
+		outline: none
+
+input[type="text"],
+input[type="search"],
+input[type="password"],
+input[type="tel"]
+	appearance: none
+	border: none
+	outline: none
+
+body
+	height: 100vh
+	background-color: #fff
+	background: 0 0 / cover url('../images/page-background.jpg') no-repeat
+
+.site-wrapper
+	height: 100vh
+
+	&.main-view
+		display: grid
+		grid-template-columns: 310px 1fr
+		grid-template-rows: auto
+		gap: 0
+
+	&.hi-contrast-bg
+		background-image: url('../images/page-background-hicontrast.jpg')
+
+	&.profile-view
+		background-color: #fff
+		display: grid
+		grid-template-columns: 60px 1fr
+		grid-auto-columns: auto
+		gap: 0
+
+@mixin GreenButton
+	border: none
+	height: 35px
+	width: 100%
+	background: rgba(28, 173, 138, 0.7)
+	border-radius: 5px
+	font-size: 14px
+	line-height: 16px
+	display: flex
+	align-items: center
+	justify-content: center
+	color: #FFFFFF
+	border: 0.5px solid #E5E5E5
+	text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25)
+	cursor: pointer
+
+@mixin Smile
+	display: flex
+	align-items: center
+	justify-content: center
+	width: 45px
+	height: 45px
+	border-radius: 50%
+	background-color: rgba(196, 196, 196, 0.5)
+
+	&::before
+		content: url('../images/smile.svg')
+		width: 30px
+		height: 30px
+
+@import _modal

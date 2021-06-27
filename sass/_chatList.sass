@@ -1,0 +1,77 @@
+.chat-list
+	margin-top: 5px
+	padding: 0 5px
+	overflow-y: auto
+	overscroll-behavior: contain
+	height: calc(100% - var(--asideHeaderheight) - 5px)
+
+	.chat
+		padding: 5px 5px 10px
+		border-radius: 5px
+		display: grid
+		grid-template-columns: 45px 1fr 60px
+		grid-auto-rows: auto
+		grid-template-areas: "smile author time" "smile message counter"
+		gap: 5px 0
+		cursor: pointer
+
+		&:nth-child(4n - 3)
+			background-color: rgba(28, 173, 138, 0.1)
+
+		&:hover, &.open
+			background-color: rgba(28, 173, 138, 0.3)
+
+		&.unread-0 .chat--message
+			font-weight: normal
+
+		&--smile
+			grid-area: smile
+			@include Smile
+
+		&--time
+			grid-area: time
+			font-size: 10px
+			line-height: 1
+			justify-self: end
+
+		&--author, &--message
+			padding-left: 10px
+
+		&--author
+			grid-area: author
+			margin-top: 2px
+			font-weight: bold
+			font-size: 14px
+			line-height: 16px
+
+		&--message
+			grid-area: message
+			font-size: 12px
+			line-height: 14px
+			font-weight: bold
+
+		&--unread-count
+			grid-area: counter
+			align-self: end
+			justify-self: end
+			display: flex
+			align-items: center
+			justify-content: center
+			width: 25px
+			height: 25px
+			background-color: #0d1ca8
+			border: 1px solid #000
+			border-radius: 50%
+			color: #fff
+			text-shadow: 0 0 1px #000
+
+			&.hidden
+				display: none
+
+		&--separate-line
+			background-color: rgba(0, 0, 0, 0.1)
+			height: 2px
+			margin: 5px 10px
+
+		&-wrapper:last-child .chat--separate-line
+			display: none
