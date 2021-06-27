@@ -1,0 +1,18 @@
+template.sidebar-header--template
+	header
+		img(src="../images/main-logo.svg" alt="Messenger")
+		a.profile(href="profile.pug") Профиль
+			img(src="../images/round-arrow.svg" alt="")
+
+
+template.search-line--template
+	.search-line
+		input(type="search")
+		.search-background
+			img(src="../images/search.svg" alt="")
+			span Поиск
+		img.search-icon(src="../images/search.svg" alt="")
+
+include ./search-result.pug
+
+script(src="../js/sidebar/loadHeader.ts")
