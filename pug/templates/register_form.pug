@@ -1,0 +1,30 @@
+template.register-form--template
+    .site-wrapper.hi-contrast-bg
+        .modal
+            img(src="../images/main-logo.svg", alt="Messenger")
+            h2 Регистрация
+            form.register
+                .input-group
+                    label Имя и Фамилия
+                    input(type="text" name="name" id="name" autofocus)
+
+                .input-group
+                    label Логин
+                    input(type="text" name="login")
+
+                .input-group
+                    label Телефон
+                    input(type="tel" name="phone")
+
+                .two-columns
+                    .input-group
+                        label Пароль
+                        input(type="password" name="password1")
+                    .input-group
+                        label Пароль
+                        input(type="password" name="password2")
+                    .error
+
+                .modal-bottom
+                    button Зарегистрироваться
+                    a(href="./login.pug") Уже есть аккаунт?
