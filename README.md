@@ -1,4 +1,4 @@
-Ссылка на Pull request: https://github.com/prince-lvov/middle.messenger.praktikum.yandex/pull/5
+Ссылка на Pull request Sprint 2: https://github.com/prince-lvov/middle.messenger.praktikum.yandex/pull/8
 Домен из Netlify:https://youthful-torvalds-a84faf.netlify.app
 https://www.figma.com/file/3tu2tLzr8jBasqiMk3vtJ7/Messenger%2B?node-id=96%3A343
 ### Ветка, в которой делаете задания спринта, должна называться sprint_i, где i - номер спринта. Не переименовывайте её.
