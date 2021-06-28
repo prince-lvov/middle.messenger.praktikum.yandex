@@ -19,7 +19,7 @@ class Validator {
 	 * @param {string} password1Name Имя поля, в котором содержится первый пароль
 	 * @param {string} password2Name Имя поля, в котором содержится второй пароль
 	 *  */
-	comparePaswords(password1Name: string, password2Name: string): void {
+	comparePaswords(password1Name: string, password2Name: string): boolean {
 		if (!(password1Name in this.validators) || !(password2Name in this.validators)) {
 			throw 'Значения паролей не добавлены в валидатор'
 		}
@@ -29,7 +29,10 @@ class Validator {
 
 		if (password1.length && password2.length && password1 !== password2) {
 			this.setErrorValue('Пароли не совпадают')
+			return false
 		}
+
+		return true
 	}
 
 	/**
@@ -49,15 +52,17 @@ class Validator {
 	 * Запуск проверки указанного поля
 	 * @param {string} fieldName Имя поля, которое нужно проверить
 	 */
-	runValidation(): null|void {
+	runValidation(): boolean {
 		this.resetErrorValue()
 
 		// Проверка полей, для имён которых зарегистрированы функции валидации
 		for (let fieldName in this.validators) {
 			if (!this.validateField(fieldName)) {
-				break
+				return false
 			}
 		}
+
+		return true
 	}
 
 	/**

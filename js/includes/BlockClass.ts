@@ -6,7 +6,8 @@ enum EVENTS {
 	INIT = 'init',
 	MOUNTED = 'flow:component-did-mount',
 	UPDATED = 'flow:component-did-update',
-	RENDER = 'flow:render'
+	RENDER = 'flow:render',
+	SHOW = 'flow:show'
 }
 
 interface BlockInterface {
@@ -14,11 +15,13 @@ interface BlockInterface {
 	bindPropsToElements(bindings: { [propName: string]: string }): void
 	componentDidMount(): void
 	componentDidUpdate(newProps: BlockProperties): void
+	componentDidShow(): void
 	render(): void
 	setProps(newProps: BlockProperties): void
 	show(mode: string): void
 	hide(): void
-	findChild(selector: string): Element | null
+	findChild(selector: string): HTMLElement | null
+	findCHildren(selector: string): HTMLElement[] | null
 	mountTo(parent: string | HTMLElement | BlockClass): void
 	clear(): void
 }
@@ -92,6 +95,7 @@ class BlockClass implements BlockInterface {
 		this.eventBus.on(EVENTS.MOUNTED, this._componentDidMount.bind(this))
 		this.eventBus.on(EVENTS.RENDER, this._render.bind(this))
 		this.eventBus.on(EVENTS.UPDATED, this._componentDidUpdate.bind(this))
+		this.eventBus.on(EVENTS.SHOW, this.componentDidShow.bind(this))
 	}
 
 	init(): void {}
@@ -156,20 +160,32 @@ class BlockClass implements BlockInterface {
 	show(mode?: string): void {
 		const newMode = mode || this.displayMode || 'block'
 		this.element.style.display = newMode
+		this.eventBus.emit(EVENTS.SHOW)
 	}
+
+	componentDidShow(): void { }
 
 	hide(): void {
 		this.displayMode = getComputedStyle(this.element).display
 		this.element.style.display = 'none'
 	}
 
-	findChild(selector: string): Element | null {
+	findChild(selector: string): HTMLElement | null {
 		const child = this.template.querySelector(selector)
 		if (!child) {
 			return null
 		}
 
 		return child as HTMLElement
+	}
+
+	findChildren(selector: string): HTMLElement[] | null {
+		const children = this.template.querySelectorAll(selector)
+		if (!children || !children.length) {
+			return null
+		}
+
+		return Array.from(children) as HTMLElement[]
 	}
 
 	/**

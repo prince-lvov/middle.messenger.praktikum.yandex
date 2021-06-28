@@ -1,4 +1,7 @@
 import BlockClass from './includes/BlockClass'
+import FormValidatorClass from './includes/FormValidatorClass'
+import Validator from './includes/ValidatorClass'
+import VALIDATION_CONDITIONS from './includes/validationConditions'
 
 class ChatHeaderClass extends BlockClass {
 	init(): void {
@@ -9,7 +12,43 @@ class ChatHeaderClass extends BlockClass {
 			})
 		}
 
-		//TODO Обработка клика по элементам меню верхней формы с открытием попапа ChatActionPopupClass
+		const actionFormValues: { [action: string]: { formTitle: string, buttonValue: string } } = {
+			addUser: {
+				formTitle: 'Добавить пользователя',
+				buttonValue: 'Добавить'
+			},
+			removeUser: {
+				formTitle: 'Удалить пользователя',
+				buttonValue: 'Удалить'
+			},
+			deleteChat: {
+				formTitle: 'Удалить чат с пользователем',
+				buttonValue: 'Удалить'
+			}
+		}
+
+		const actionTriggerEls = this.findChildren('li[data-action]')
+		if (actionTriggerEls !== null) {
+			actionTriggerEls.forEach(actionTrigger => {
+				actionTrigger.addEventListener('click', () => {
+					const action = actionTrigger.dataset.action
+					const availableActions = Object.keys(actionFormValues)
+					if (!action || !availableActions.includes(action)) {
+						return true
+					}
+
+					const title = actionFormValues[action].formTitle
+					const buttonValue = actionFormValues[action].buttonValue
+
+					popup.setProps({ action, title, buttonValue })
+					popup.show()
+
+					if (triggerEl) {
+						triggerEl.classList.remove('open')
+					}
+				})
+			})
+		}
 	}
 }
 
@@ -24,9 +63,81 @@ class ChatInputAreaClass extends BlockClass {
 	}
 }
 
+class PopupValidatorClass extends FormValidatorClass {
+	createValidator(): Validator {
+		const formEl = this.form
+
+		if (!formEl) {
+			throw new Error('Не найден элемент формы во всплывающем окне')
+		}
+
+		const inputEl = formEl.querySelector('input')
+		if (!inputEl) {
+			throw new Error('Не найдено поле ввода логина во всплывающем окне')
+		}
+
+		const errorMessageElement = formEl.querySelector('.error') as HTMLElement
+		if (!errorMessageElement) {
+			throw 'Не найден элемент отображения ошибки'
+		}
+
+		return new Validator(errorMessageElement, {
+			login: {
+				element: inputEl,
+				validators: [
+					VALIDATION_CONDITIONS.loginSymbols
+				]
+			}
+		})
+	}
+}
+
 class ChatActionPopupClass extends BlockClass {
 	init(): void {
-		//TODO обработка сабмита формы во всплывающем окне
+		const component = this
+		this.element.addEventListener('click', () => {
+			component.hide()
+		})
+
+		const windowEl = this.findChild('.window')
+		if (windowEl) {
+			windowEl.addEventListener('click', ev => ev.stopPropagation())
+		}
+
+		const closeLinkEl = this.findChild('.cancel')
+		if (closeLinkEl) {
+			closeLinkEl.addEventListener('click', () => {
+				component.hide()
+			})
+		}
+
+		const formEl = this.findChild('form')
+		if (formEl) {
+			const validator: FormValidatorClass = new PopupValidatorClass(formEl)
+			formEl.addEventListener('submit', ev => {
+				ev.preventDefault()
+				if (!validator.validateFormFields()) {
+					return false
+				}
+				console.log('%c%s', 'color: #d42', `❗Нужен обработчик события ${formEl.dataset.action}`)
+				this.hide()
+			})
+		}
+	}
+
+	render() {
+		const formEl = this.findChild('form')
+		if (formEl) {
+			formEl.dataset.action = this.props.getProperty('action')
+		}
+	}
+
+	componentDidShow(): void {
+		const inputEl = this.findChild('input') as HTMLInputElement
+		if (inputEl) {
+			inputEl.value = ''
+			inputEl.focus()
+		}
 	}
 }
 
@@ -107,9 +218,9 @@ const messagesBody = new BlockClass('.chat-messages--body--template')
 messagesBody.mountTo(messagesArea)
 
 const popup = new ChatActionPopupClass('.chat-action-popup--template', {
-	buttonText: 'Добавить'
+	buttonValue: 'Добавить'
 }, '.main-view')
-popup.bindPropsToElements({ buttonText: 'button' })
+popup.bindPropsToElements({ buttonValue: 'button', title: 'h2' })
 
 // Сообщения в чате
 messagesList.forEach(msg => {

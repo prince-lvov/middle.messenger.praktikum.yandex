@@ -3,8 +3,15 @@ export { FormValidator as default }
 
 abstract class FormValidator {
 	protected validator: Validator
+	protected form: HTMLElement | undefined = undefined
 
-	constructor(protected formSelector: string) {
+	constructor(form: string | HTMLElement) {
+		if (form instanceof HTMLElement) {
+			this.form = form
+		}
+		else {
+			this.form = document.querySelector(form) as HTMLElement || undefined
+		}
 		this.validator = this.createValidator()
 		this.appendEventListeners()
 	}
@@ -18,7 +25,7 @@ abstract class FormValidator {
 		})
 	}
 
-	protected validateFormFields(): void {
-		this.validator.runValidation()
+	validateFormFields(): boolean {
+		return this.validator.runValidation()
 	}
 }
