@@ -1,3 +1,5 @@
+export { HTTPTransport as default }
+
 enum METHODS {
     GET = 'GET',
     POST = 'POST',
@@ -16,8 +18,8 @@ type Options = {
 }
 type OptionWithoutMethod = Omit<Options, 'method'>
 
-function queryStringify(data: IHeaders) {
-    if (typeof data !== 'object') {
+function queryStringify(data: IHeaders):string {
+    if (typeof data !== 'object' || data === null) {
         throw new Error('Data must be object');
     }
 

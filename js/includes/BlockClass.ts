@@ -195,7 +195,7 @@ class BlockClass implements BlockInterface {
 	mountTo(parent: string | BlockClass | HTMLElement): void {
 		let parentNode: HTMLElement
 
-		if (typeof parent == 'string') {
+		if (typeof parent === 'string') {
 			const node = document.querySelector(parent) as HTMLElement
 			if (!node) {
 				throw new Error(`Не найден родительский элемент с селектором ${parent}`)
