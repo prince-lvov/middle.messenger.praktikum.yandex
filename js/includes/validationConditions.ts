@@ -14,8 +14,8 @@ const validationConditioins: conditionsObject = {
 	},
 
 	passwordSymbols: {
-		callback: (value: string) => /[A-ZА-ЯЁ]/.test(value) && /\d/.test(value) && /[a-zа-яё]/.test(value),
-		errorMessage: 'Пароль должен содержать хотя бы одну цифру, одну строчную и одну прописную букву'
+		callback: (value: string) => /[A-Z]/.test(value) && /\d/.test(value) && /[a-z]/.test(value),
+		errorMessage: 'Пароль должен содержать только буквы латинского алфавита, хотя бы одну цифру, одну строчную и одну прописную букву'
 	},
 
 	firstAndLastName: {
