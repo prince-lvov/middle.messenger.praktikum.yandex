@@ -39,13 +39,9 @@ class Validator {
 	 * Получение массива зарегистрированных элементов формы
 	 */
 	getFormFields(): HTMLInputElement[] {
-		const output: HTMLInputElement[] = []
-
-		for (let fieldName in this.validators) {
-			output.push(this.validators[fieldName].element)
-		}
-
-		return output
+		return Object.values(this.validators).map(function (object){
+			return object.element
+		})
 	}
 
 	/**
