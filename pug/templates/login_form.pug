@@ -5,12 +5,12 @@ template.login-form--template
             h2 Авторизация
             form.login
                 .input-group
-                    label Логин
-                    input(type="text" name="login" autofocus)
+                    label(for="login") Логин
+                    input(type="text" name="login" id="login" autofocus)
 
                 .input-group
-                    label Пароль
-                    input(type="password" name="password")
+                    label(for="password") Пароль
+                    input(type="password" name="password" id="password")
 
                 .error
 

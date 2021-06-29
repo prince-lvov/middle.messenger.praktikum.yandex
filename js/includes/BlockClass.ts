@@ -21,7 +21,7 @@ interface BlockInterface {
 	show(mode: string): void
 	hide(): void
 	findChild(selector: string): HTMLElement | null
-	findCHildren(selector: string): HTMLElement[] | null
+	findChildren(selector: string): HTMLElement[] | null
 	mountTo(parent: string | HTMLElement | BlockClass): void
 	clear(): void
 }

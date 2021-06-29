@@ -5,24 +5,24 @@ template.register-form--template
             h2 Регистрация
             form.register
                 .input-group
-                    label Имя и Фамилия
+                    label(for="name") Имя и Фамилия
                     input(type="text" name="name" id="name" autofocus)
 
                 .input-group
-                    label Логин
-                    input(type="text" name="login")
+                    label(for="login") Логин
+                    input(type="text" name="login" id="login")
 
                 .input-group
-                    label Телефон
-                    input(type="tel" name="phone")
+                    label(for="phone") Телефон
+                    input(type="tel" name="phone" id="phone")
 
                 .two-columns
                     .input-group
-                        label Пароль
-                        input(type="password" name="password1")
+                        label(for="password1") Пароль
+                        input(type="password" name="password1" id="password1")
                     .input-group
-                        label Пароль
-                        input(type="password" name="password2")
+                        label(for="password2") Пароль
+                        input(type="password" name="password2" id="password2")
                     .error
 
                 .modal-bottom
