@@ -6,6 +6,8 @@ block styles
 block content
 	.site-wrapper.main-view
 		aside
-			include include/sidebar.pug
+			include ../components/Sidebar/template.pug
+			script(src='../components/Sidebar/index.ts')
 		main
-			include templates/chat-page.pug
+			include ../components/ChatPageWithChat/template.pug
+			script(src="../components/ChatPageWithChat/index.ts")

@@ -6,7 +6,8 @@ block styles
 block content
 	.site-wrapper.main-view
 		aside
-			include include/sidebar.pug
+			include ../components/Sidebar/template.pug
+			script(src='../components/Sidebar/index.ts')
 		main.centered
 			img(src="../images/chat.svg")
 			.info Выберите чат, чтобы отправить сообщение

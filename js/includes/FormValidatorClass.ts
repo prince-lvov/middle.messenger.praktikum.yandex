@@ -5,13 +5,8 @@ abstract class FormValidator {
 	protected validator: Validator
 	protected form: HTMLElement | undefined = undefined
 
-	constructor(form: string | HTMLElement) {
-		if (form instanceof HTMLElement) {
-			this.form = form
-		}
-		else {
-			this.form = document.querySelector(form) as HTMLElement || undefined
-		}
+	constructor(form: HTMLElement) {
+		this.form = form
 		this.validator = this.createValidator()
 		this.appendEventListeners()
 	}

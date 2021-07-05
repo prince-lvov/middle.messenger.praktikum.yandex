@@ -1,5 +1,5 @@
-import BlockClass from './includes/BlockClass'
-import RegisterFormValidatorClass from './includes/RegisterFormValidatorClass'
+import BlockClass from '../../js/includes/BlockClass'
+import RegisterFormValidatorClass from '../../js/includes/RegisterFormValidatorClass'
 
 class RegisterFormClass extends BlockClass {
     init() {

@@ -1,5 +1,5 @@
-import BlockClass from './includes/BlockClass'
-import LoginFormValidatorClass from './includes/LoginFormValidatorClass'
+import BlockClass from '../../js/includes/BlockClass'
+import LoginFormValidatorClass from '../../js/includes/LoginFormValidatorClass'
 
 class LoginFormClass extends BlockClass {
     init() {
