@@ -4,19 +4,5 @@ block styles
 	link(rel="stylesheet", href="../sass/common.sass")
 
 block content
-	.site-wrapper.hi-contrast-bg
-		.modal
-			img(src="../images/main-logo.svg", alt="Messenger")
-			h2 Авторизация
-			form.login
-				.input-group
-					label Логин
-					input(type="text" name="login" autofocus)
-
-				.input-group
-					label Пароль
-					input(type="password" name="password")
-
-				.modal-bottom
-					button Войти
-					a(href="./register.pug") Еще не зарегистрированы?
+	include ../components/LoginPage/template.pug
+	script(src="../components/LoginPage/index.ts")

@@ -1,37 +1,10 @@
 extends include/layout.pug
 
-
-
 block styles
 	link(rel="stylesheet" href="../sass/profile.sass")
 	link(rel="stylesheet" href="../sass/chatPage.sass")
 
 
 block content
-	.site-wrapper.profile-view
-		a.back-link(href="index.pug")
-			.arrow
-				img(src="../images/back-arrow.svg" alt="")
-		.center_class
-			.big_avatar
-			.new_name Иван
-			.profile_field
-				label.field_assignment Имя
-				label.field_data Иван
-			.profile_field.top_margin
-				label.field_assignment Фамилия
-				label.field_data Кузнецов
-			.profile_field.top_margin
-				label.field_assignment Логин
-				label.field_data ivanyshka
-			.profile_field.top_margin
-				label.field_assignment Телефон
-				label.field_data +7 (888) 00 00 000
-			.profile_field.top_margin
-				label.field_assignment Почта
-				label.field_data ivanyshka@yandex.ru
-			.profile_field.change_data_flex
-				label.change_data_field Изменить данные
-			.profile_field.change_data_flex2
-				label.change_data_field Изменить пароль
-			button.green_button_exit Выйти
+	include ../components/ProfilePage/template.pug
+	script(src="../components/ProfilePage/index.ts")

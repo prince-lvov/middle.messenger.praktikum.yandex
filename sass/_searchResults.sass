@@ -27,5 +27,9 @@
 			align-self: center
 
 		&--separate-line
-			@include SeparateLine
+			background-color: rgba(0, 0, 0, 0.1)
+			height: 2px
 			margin: 10px 0
+
+		&--wrapper:last-child .search-result--separate-line
+			display: none

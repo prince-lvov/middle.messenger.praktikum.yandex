@@ -1,0 +1,19 @@
+template.chat-messages--input-area--template
+	form.chat-messages--input-area
+		.clip
+			button(type="button")
+				img(src="../images/chat-icons/clip.svg" alt="")
+		input(type="text" placeholder="Сообщение" name="newMessage")
+		.arrow
+			button(type="submit")
+				img(src="../images/chat-icons/send-arrow.svg" alt="")
+		ul.submenu
+			li
+				img(src="../images/chat-icons/attach-photo-video.svg")
+				span.menu-action Фото или видео
+			li
+				img(src="../images/chat-icons/attach-file.svg")
+				span.menu-action Файл
+			li
+				img(src="../images/chat-icons/attach-location.svg")
+				span.menu-action Локация

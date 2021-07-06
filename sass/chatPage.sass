@@ -175,8 +175,8 @@
 
 		.image-message
 			overflow: hidden
-			grid-template-rows: 275px
-			min-height: 275px
+			grid-template-rows: 225px
+			min-height: 225px
 
 			.chat-message--time-and-status
 				transform: translate(-5px, -15px)
@@ -205,8 +205,11 @@
 
 			.chat-message--status
 				margin-right: 7px
-				display: flex
 				align-items: center
+				display: none
+
+				&.visible
+					display: flex
 
 			.chat-message--time
 				font-size: 9px
