@@ -1,4 +1,4 @@
-extends include/layout.pug
+extends include/layout
 
 block styles
 	link(rel="stylesheet" href="../sass/chatPage.sass")
@@ -6,8 +6,8 @@ block styles
 block content
 	.site-wrapper.main-view
 		aside
-			include ../components/Sidebar/template.pug
+			include ../components/Sidebar/template
 			script(src='../components/Sidebar/index.ts')
 		main
-			include ../components/ChatPageWithChat/template.pug
+			include ../components/ChatPageWithChat/template
 			script(src="../components/ChatPageWithChat/index.ts")

@@ -24,5 +24,5 @@ class RegisterFormClass extends BlockClass {
         }
     }
 }
-const registerForm = new RegisterFormClass('.register-form--template')
-registerForm.mountTo('body')
+export const registerForm = new RegisterFormClass('.register-form--template')
+//registerForm.mountTo('body')

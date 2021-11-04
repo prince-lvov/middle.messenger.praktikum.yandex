@@ -24,5 +24,6 @@ class LoginFormClass extends BlockClass {
         }
     }
 }
-const loginForm = new LoginFormClass('.login-form--template')
-loginForm.mountTo('body')
+export const loginForm = new LoginFormClass('.login-form--template')
+
+
