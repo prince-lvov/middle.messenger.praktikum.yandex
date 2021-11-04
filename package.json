@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "scripts": {
     "start": "concurrently \"parcel pug/index.pug pug/index2.pug pug/chat-page.pug\" \"node ./js/server.js\"",
-    "watch": "parcel serve --host 0.0.0.0 pug/index.pug pug/login.pug pug/chat-page.pug",
-    "dev": "parcel pug/index.pug pug/index2.pug pug/profile.pug pug/chat-page.pug --port 3000",
-    "build": "parcel build pug/index.pug pug/index2.pug pug/chat-page.pug",
-    "dev3": "parcel pug/index777.pug pug/include/layout.pug  --no-cache",
+    "watch": "parcel serve --host 0.0.0.0 pug/index.pug old_template/login.pug pug/chat-page.pug",
+    "dev": "parcel pug/index.pug pug/index2.pug old_template/profile.pug pug/chat-page.pug --port 3000",
+    "build": "parcel build pug/index.pug pug/index2.pug old_template/chat-page.pug",
+    "dev3": "parcel pug/index777.pug route/include/layout.pug  --no-cache",
     "dev4": "parcel route/index.pug --port 3000 --no-cache"
   },
   "author": "",

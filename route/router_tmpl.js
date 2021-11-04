@@ -45,7 +45,7 @@ class Route {
 
     render() {
         render(this._props.rootQuery, this._blockClass);
-        listener(this._pathname)
+        setTimeout(() => listener(this._pathname),1000)
     }
 }
 
@@ -138,39 +138,16 @@ function listener(pathname) {
         button_to_login.addEventListener('click', () => router.go("/"))
     }
     if (pathname === "/messenger") {
-        const button_profile = document.getElementsByTagName('aside')[0].getElementsByTagName("header")[0]
+        const button_profile = document.getElementById("button_profile")
         console.log(button_profile)
-        //button_profile.addEventListener('click', () => router.go("/"))
+        button_profile.addEventListener('click', () => router.go("/settings"))
     }
-
-
-
+    if (pathname === "/settings") {
+        const back_link = document.querySelector(".back-link")
+        console.log(back_link)
+        back_link.addEventListener('click', () => router.go("/messenger"))
+    }
 }
 
 
 
-//Кнопка перехода со страницы Логин на страницу с Регистрацией
-
-// button.removeEventListener('click', () => router.go("/sign-up"))
-
-
-
-
-//button2.addEventListener('click', router.go("/"))
-// setTimeout(() => {
-//     router.go("/sign-up");
-// }, 1000);
-
-// setTimeout(() => {
-//     router.go("/messenger");
-// }, 1000);
-//
-// // А можно и назад
-// setTimeout(() => {
-//     router.back();
-// }, 3000);
-//
-// // И снова вперёд
-// setTimeout(() => {
-//     router.forward();
-// }, 5000);
