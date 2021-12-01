@@ -1,10 +1,14 @@
 import { VDom } from "../../my_core/VDom";
 import { state } from '../../my_core/core'
-import { loadAvatar } from "../ProfilePage/ProfilePageApi";
+import {getDataProfile, loadAvatar} from "../ProfilePage/ProfilePageApi";
 import { change_password } from "./ChangePasswordPageApi";
 import Router from "../../my_core/router";
 
 export default function ChangePasswordPage () {
+
+    if (!state.user.id) getDataProfile().then(() => {
+        Router.get().to('/change_password')
+    })
 
     const avatar = [
         VDom.createElement('input', { type: 'file', onchange: loadAvatar })

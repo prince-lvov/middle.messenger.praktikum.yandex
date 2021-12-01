@@ -7,8 +7,8 @@ import {selectChat, getData} from "../ChatPage/ChatPageApi";
 
 export default function ProfilePage () {
 
-    if (!state.user) getDataProfile().then(() => {
-
+    if (!state.user.id) getDataProfile().then(() => {
+        Router.get().to('/settings')
     })
 
     const avatar = [
