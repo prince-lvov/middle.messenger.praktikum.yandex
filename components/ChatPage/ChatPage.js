@@ -1,7 +1,7 @@
-import { VDom } from "../../my_core/VDom";
-import Router from "../../my_core/router";
+import { VDom } from '../../my_core/VDom';
+import Router from '../../my_core/router';
 import { state } from '../../my_core/core'
-import {getData, sendMessage, selectChat, create_chat, ChoiceAction} from "./ChatPageApi"
+import { getData, sendMessage, selectChat, create_chat, ChoiceAction } from './ChatPageApi'
 
 function InitSubmenu () {
 
@@ -58,14 +58,14 @@ export default function ChatPage () {
     })
 
     const children = state.currentChat ? [
-        VDom.createElement(Sidebar, {chats: state.chats}),
+        VDom.createElement(Sidebar, { chats: state.chats }),
         VDom.createElement(ChatPageWithChat),
         VDom.createElement(Popup)
     ] : [
-        VDom.createElement(Sidebar, {chats: state.chats}),
+        VDom.createElement(Sidebar, { chats: state.chats }),
         VDom.createElement(Popup)
     ]
-    return VDom.createElement('div', { className: 'site-wrapper main-view'}, children)
+    return VDom.createElement('div', { className: 'site-wrapper main-view' }, children)
 }
 
 function Sidebar ({ chats }) {
@@ -105,7 +105,7 @@ function ChatListArea ({ chats }) {
 
 function ChatListItems ({ chat }) {
     return VDom.createElement('div', { className: 'chat-wrapper', onclick: () => { selectChat(chat) } },
-        VDom.createElement('div', { className: 'chat'},
+        VDom.createElement('div', { className: 'chat' },
             VDom.createElement('div', { className: 'chat--smile' }),
           //VDom.createElement('time', { className: 'chat--time' }),
             VDom.createElement('div', { className: 'chat--author' }, chat.title)),
@@ -129,7 +129,7 @@ function ChatPageWithChat () {
 export function ChatHeader () {
     return VDom.createElement('div', { className: 'chat-messages--header' },
         VDom.createElement('div', { className: 'smile' }),
-        VDom.createElement('div', { className: 'name'}, state.OnlyUsersInChatAlready),
+        VDom.createElement('div', { className: 'name' }, state.OnlyUsersInChatAlready),
         VDom.createElement('div', { className: 'chat-menu', onclick: InitSubmenu },
             VDom.createElement('img', { src: require('../../images/chat-icons/chat-menu.svg'), alt: '' })
         ),
@@ -149,7 +149,7 @@ export function ChatHeader () {
 
 function InputArea () {
     return VDom.createElement('form', { className: 'chat-messages--input-area' },
-         VDom.createElement('div', { className: 'clip'},
+         VDom.createElement('div', { className: 'clip' },
                  VDom.createElement('img', { src: require('../../images/chat-icons/clip.svg'), alt: '' })),
         VDom.createElement('input', { type: 'text', placeholder: 'Сообщение', name: 'message' }),
         VDom.createElement('div', { className: 'arrow', onclick: sendMessage },
@@ -157,13 +157,13 @@ function InputArea () {
         VDom.createElement('ul', { className: 'submenu' },
             VDom.createElement('li', { },
                 VDom.createElement('img', { src: require('../../images/chat-icons/attach-photo-video.svg') }),
-                VDom.createElement('span', {className: 'menu-action' }, 'Фото или видео')),
+                VDom.createElement('span', { className: 'menu-action' }, 'Фото или видео')),
             VDom.createElement('li', {},
                 VDom.createElement('img', { src: require('../../images/chat-icons/attach-file.svg') }),
-                VDom.createElement('span', {className: 'menu-action' }, 'Файл')),
+                VDom.createElement('span', { className: 'menu-action' }, 'Файл')),
             VDom.createElement('li', {},
                 VDom.createElement('img', { src: require('../../images/chat-icons/attach-location.svg') }),
-                VDom.createElement('span', {className: 'menu-action' }, 'Локация'))
+                VDom.createElement('span', { className: 'menu-action' }, 'Локация'))
         )
     )
 }
@@ -198,21 +198,12 @@ function MessageYou ({ message }) {
     )
 }
 
-function MessageImage () {
-    return VDom.createElement('div', { className: 'chat-message image-message' },
-        VDom.createElement('div', { className: 'chat-message--image' },
-            VDom.createElement('img', {src: require('../../images/chat-image.png'), alt: '' })),
-        VDom.createElement('div', { className: 'chat-message--time-and-status' },
-            VDom.createElement('time', { className: 'chat-message--time' }, '09:34'))
-    )
-}
-
 function Popup () {
     return VDom.createElement('div', { className: 'chat-action-popup' },
         VDom.createElement('div', { className: 'window modal' },
             VDom.createElement('form', { },
                 VDom.createElement('img', { src: require('../../images/main-logo.svg'), alt: '' }),
-                VDom.createElement('h2', {className: 'h2' }),
+                VDom.createElement('h2', { className: 'h2' }),
                 VDom.createElement('div', { className: 'input-group' },
                     VDom.createElement('label', {}, 'Логин'),
                     VDom.createElement('input', { type: 'text' })),

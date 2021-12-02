@@ -1,9 +1,6 @@
 import { state } from '../../my_core/core'
 import Router from '../../my_core/router'
 import WebSocket from '../../my_core/WebSocket'
-import {VDom} from "../../my_core/VDom";
-import {ChatHeader} from "./ChatPage";
-import {render} from "../../my_core/core";
 
 const host = 'https://ya-praktikum.tech/api/v2'
 

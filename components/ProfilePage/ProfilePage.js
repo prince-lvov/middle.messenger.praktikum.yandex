@@ -1,8 +1,8 @@
-import { VDom } from "../../my_core/VDom";
+import { VDom } from '../../my_core/VDom';
 import { state } from '../../my_core/core'
-import {save, loadAvatar, logout, getDataProfile} from "./ProfilePageApi";
-import Router from "../../my_core/router";
-import {selectChat, getData} from "../ChatPage/ChatPageApi";
+import { save, loadAvatar, logout, getDataProfile } from './ProfilePageApi';
+import Router from '../../my_core/router';
+
 
 
 export default function ProfilePage () {
@@ -25,14 +25,14 @@ export default function ProfilePage () {
                     Router.get().to('/messenger')
                 } },
             VDom.createElement('div', { className: 'arrow' },
-                VDom.createElement('img', { src: require('../../images/back-arrow.svg'), alt: ''}))
+                VDom.createElement('img', { src: require('../../images/back-arrow.svg'), alt: '' }))
         ),
         VDom.createElement('div', { className: 'center_class' },
             VDom.createElement('div', { className: state.user.avatar ? 'big_avatar with_avatar' : 'big_avatar' }, avatar),
             VDom.createElement('div', { className: 'new_name' }, state.user?.first_name),
             VDom.createElement('div',{ className: 'profile_field' },
                 VDom.createElement('label', { className: 'field_assignment' }, 'Имя'),
-                VDom.createElement('input', { className: 'field_data', name: 'first_name', value: state.user?.first_name})),
+                VDom.createElement('input', { className: 'field_data', name: 'first_name', value: state.user?.first_name })),
             VDom.createElement('div',{ className: 'profile_field top_margin' },
                 VDom.createElement('label', { className: 'field_assignment' }, 'Фамилия'),
                 VDom.createElement('input', { className: 'field_data', name: 'second_name', value: state.user?.second_name })),
