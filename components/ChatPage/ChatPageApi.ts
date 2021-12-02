@@ -41,9 +41,7 @@ export async function create_chat (e) {
 }
 
 export async function selectChat (chat) {
-    console.log(chat)
     const onMessage = (message) => {
-        console.log(message)
         const messages = JSON.parse(message)
         Array.isArray(messages) ? state.messages.push(...messages.reverse()) : state.messages.push(messages)
         Router.get().to('/messenger')
@@ -166,7 +164,7 @@ export async function AddOrDeleteUserToChat (e, choice) {
 }
 
 async function WhoInThisChat (chatId) {
-    console.log('WHO')
+
     const userResult = await fetch(`${host}/chats/${chatId}/users`, {
         method: 'GET',
         mode: 'cors',
@@ -174,8 +172,6 @@ async function WhoInThisChat (chatId) {
     })
 
     state.usersInChatAlready = await userResult.json()
-
-    console.log(state.usersInChatAlready)
 
     state.OnlyUsersInChatAlready = ''
     for (let i in state.usersInChatAlready) {

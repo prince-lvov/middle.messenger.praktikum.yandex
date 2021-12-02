@@ -28,29 +28,23 @@ class WebSocketService {
     init() {
         this.socket.addEventListener('open',
             () => {
-                console.log('Соединение установлено');
                 this.onConnect(this)
             });
 
         this.socket.addEventListener('close', event => {
             if (event.wasClean) {
-                console.log('Соединение закрыто чисто');
             } else {
-                console.log('Обрыв соединения');
                 alert('Ошибка соединения')
             }
-            console.log(`Код: ${event.code} | Причина: ${event.reason}`);
         });
 
         this.socket.addEventListener('message', event => {
-            console.log('Получены данные', event.data);
             const data = JSON.parse(event.data)
             if (data.type == 'ping' || data.type == 'pong') return
             this.onMessage(event.data)
         });
 
         this.socket.addEventListener('error', event => {
-            console.log('Ошибка', event);
             alert('Ошибка соединения');
         });
 
@@ -60,7 +54,7 @@ class WebSocketService {
         
         if (state.webSocket) state.webSocket.socket.close()
         if (interval) clearInterval(interval)
-        interval = setInterval(() => { this.socket.send(pingMessage); console.log('PING', this.chatId) }, 10000)
+        interval = setInterval(() => { this.socket.send(pingMessage) }, 10000)
     }
 
     send(message: string) {

@@ -57,7 +57,6 @@ export default class Router {
     }
 
     to (name: string) {
-        console.log(name)
         const route = this.findRouteByPath(name)
         if (!route) throw new Error(`Маршрут ${window.location.pathname} не найден`)
         history.pushState({}, '', route.path)
