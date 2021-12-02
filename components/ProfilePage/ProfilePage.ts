@@ -1,9 +1,7 @@
-import { VDom } from '../../my_core/VDom';
+import { VDom } from '../../my_core/VDom'
 import { state } from '../../my_core/core'
-import { save, loadAvatar, logout, getDataProfile } from './ProfilePageApi';
-import Router from '../../my_core/router';
-
-
+import { save, loadAvatar, logout, getDataProfile } from './ProfilePageApi'
+import Router from '../../my_core/router'
 
 export default function ProfilePage () {
 
