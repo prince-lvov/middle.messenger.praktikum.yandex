@@ -1,4 +1,4 @@
-import { VDom } from "./VDom";
+import { VDom } from './VDom'
 
 export const state = {
     chats: [],
@@ -12,7 +12,7 @@ export const state = {
 
 export function renderView (state, page) {
     render(
-        VDom.createElement(page, {state}),
+        VDom.createElement(page, { state }),
         document.getElementById('root')
     )
 }

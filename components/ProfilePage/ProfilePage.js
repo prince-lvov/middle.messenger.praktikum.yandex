@@ -7,9 +7,11 @@ import Router from '../../my_core/router';
 
 export default function ProfilePage () {
 
-    if (!state.user.id) getDataProfile().then(() => {
-        Router.get().to('/settings')
-    })
+    if (!state.user.id) {
+        getDataProfile().then(() => {
+            Router.get().to('/settings')
+        })
+    }
 
     const avatar = [
         VDom.createElement('input', { type: 'file', onchange: loadAvatar })

@@ -1,5 +1,5 @@
-import Router from "../../my_core/router";
-import { logout } from "../ProfilePage/ProfilePageApi"
+import Router from '../../my_core/router'
+import { logout } from '../ProfilePage/ProfilePageApi'
 
 const host = 'https://ya-praktikum.tech/api/v2'
 

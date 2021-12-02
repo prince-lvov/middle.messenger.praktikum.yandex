@@ -1,8 +1,8 @@
 // ./node_modules/.bin/mocha --require ts-node/register components/**/*.spec.ts
-import Router from "./router";
+import Router from './router'
 
-import { assert } from "chai";
-import {JSDOM} from 'jsdom';
+import { assert } from 'chai'
+import { JSDOM } from 'jsdom'
 
 const dom = new JSDOM('<!DOCTYPE html><div class="app"></div>');
 global.document = dom.window.document;

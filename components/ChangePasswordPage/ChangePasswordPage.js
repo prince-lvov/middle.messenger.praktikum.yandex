@@ -6,9 +6,11 @@ import Router from '../../my_core/router'
 
 export default function ChangePasswordPage () {
 
-    if (!state.user.id) getDataProfile().then(() => {
-        Router.get().to('/change_password')
-    })
+    if (!state.user.id) {
+        getDataProfile().then(() => {
+            Router.get().to('/change_password')
+        })
+    }
 
     const avatar = [
         VDom.createElement('input', { type: 'file', onchange: loadAvatar })

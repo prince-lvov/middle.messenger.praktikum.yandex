@@ -1,9 +1,7 @@
-// import Store from "../modules/store";
-// import constants from "../constants";
 import { state } from './core'
 
 let interval = null
-const rootUrl = 'wss://ya-praktikum.tech/ws/chats/:userId/:chatId/:token';
+const rootUrl = 'wss://ya-praktikum.tech/ws/chats/:userId/:chatId/:token'
 
 class WebSocketService {
     socket: WebSocket;

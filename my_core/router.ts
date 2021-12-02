@@ -1,4 +1,4 @@
-import { VDom } from "./VDom"
+import { VDom } from './VDom'
 import { renderView, state } from './core'
 
 export interface Type<T> extends Function { new (...args: any[]): T; }

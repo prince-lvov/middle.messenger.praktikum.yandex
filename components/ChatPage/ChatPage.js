@@ -53,9 +53,13 @@ function InitSubmenu () {
 }
 
 export default function ChatPage () {
-    if (!state.user.id) getData().then(() => {
-        if (localStorage.currentChat && !state.currentChat) selectChat(JSON.parse(localStorage.currentChat))
-    })
+    if (!state.user.id) {
+        getData().then(() => {
+            if (localStorage.currentChat && !state.currentChat) {
+                selectChat(JSON.parse(localStorage.currentChat))
+            }
+        })
+    }
 
     const children = state.currentChat ? [
         VDom.createElement(Sidebar, { chats: state.chats }),
