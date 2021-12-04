@@ -14,7 +14,7 @@ export function Popup () {
                 VDom.createElement('div', { className: 'modal-bottom' },
                     VDom.createElement('button', { className: 'choice_button', name: 'login', onclick: ChoiceAction }),
                     VDom.createElement('div', { className: 'cancel', onclick: () => {
-                            document.querySelector('.chat-action-popup').style.display = 'none'
+                            document.querySelector('.chat-action-popup').classList.remove('open')
                         } }, 'Отмена'))))
     )
 }

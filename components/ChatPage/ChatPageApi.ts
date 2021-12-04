@@ -160,7 +160,7 @@ export async function AddOrDeleteUserToChat (e, choice) {
         return
     }
 
-    document.querySelector('.chat-action-popup').style.display = 'none'
+    document.querySelector('.chat-action-popup').classList.remove('open')
 
     await selectChat(state.currentChat)
 
