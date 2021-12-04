@@ -104,8 +104,11 @@ export async function getData () {
 export async function ChoiceAction (e) {
     e.preventDefault()
     const choiceButton = document.querySelector('.choice_button').textContent
-    choiceButton === 'Добавить' ? await AddOrDeleteUserToChat(e, 'PUT') : await AddOrDeleteUserToChat(e, 'DELETE')
-
+    if (choiceButton === 'Добавить') {
+        await AddOrDeleteUserToChat(e, 'PUT')
+    } else {
+        await AddOrDeleteUserToChat(e, 'DELETE')
+    }
 }
 
 

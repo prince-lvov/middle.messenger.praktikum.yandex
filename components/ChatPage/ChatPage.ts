@@ -14,14 +14,21 @@ export default function ChatPage () {
         })
     }
 
-    const children = state.currentChat ? [
-        VDom.createElement(Sidebar, { chats: state.chats }),
-        VDom.createElement(ChatPageWithChat),
-        VDom.createElement(Popup)
-    ] : [
-        VDom.createElement(Sidebar, { chats: state.chats }),
-        VDom.createElement(Popup)
-    ]
+    const getChildren = (state) => {
+        if (state.currentChat) {
+            return [
+                VDom.createElement(Sidebar, { chats: state.chats }),
+                VDom.createElement(ChatPageWithChat),
+                VDom.createElement(Popup)
+            ]
+        }
+        return [
+            VDom.createElement(Sidebar, { chats: state.chats }),
+            VDom.createElement(Popup)
+        ]
+    }
+    const children = getChildren(state)
+
     return VDom.createElement('div', { className: 'site-wrapper main-view' }, children)
 }
 

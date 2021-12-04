@@ -57,7 +57,10 @@ function InputArea () {
 
 function MessagesBody () {
     const messages = state.messages.map(m => {
-        return m.user_id === state.user.id ? VDom.createElement(MessageMy, { message: m }) : VDom.createElement(MessageYou, { message: m })
+        if (m.user_id === state.user.id) {
+            return VDom.createElement(MessageMy, { message: m })
+        }
+        return VDom.createElement(MessageYou, { message: m })
     })
     return VDom.createElement('div', { className: 'chat-messages--body' },
         VDom.createElement('div', { className: 'chat-message date-line' }, '17 Мая 2021'),
