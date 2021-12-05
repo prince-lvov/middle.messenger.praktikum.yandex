@@ -1,5 +1,6 @@
 import { state } from '../../my_core/core'
 import Router from '../../my_core/router'
+import { getData } from '../ChatPage/ChatPageApi'
 
 const host = 'https://ya-praktikum.tech/api/v2'
 
@@ -28,21 +29,23 @@ export async function login (e) {
         return
     }
 
-    const chatsResult = await fetch(`${host}/chats`, {
-        method: 'GET',
-        mode: 'cors',
-        credentials: 'include',
-    })
+    getData().then()
 
-    state.chats = await chatsResult.json()
-
-    const userResult = await fetch(`${host}/auth/user`, {
-        method: 'GET',
-        mode: 'cors',
-        credentials: 'include',
-    })
-
-    state.user = await userResult.json()
-
-    Router.get().to('/messenger')
+    // const chatsResult = await fetch(`${host}/chats`, {
+    //     method: 'GET',
+    //     mode: 'cors',
+    //     credentials: 'include',
+    // })
+    //
+    // state.chats = await chatsResult.json()
+    //
+    // const userResult = await fetch(`${host}/auth/user`, {
+    //     method: 'GET',
+    //     mode: 'cors',
+    //     credentials: 'include',
+    // })
+    //
+    // state.user = await userResult.json()
+    //
+    // Router.get().to('/messenger')
 }

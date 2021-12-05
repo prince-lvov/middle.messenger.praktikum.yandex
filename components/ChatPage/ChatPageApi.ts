@@ -6,41 +6,32 @@ import { Chat, User } from './types'
 
 const host = 'https://ya-praktikum.tech/api/v2'
 
-export async function create_chat (e: Event) {
-    e.preventDefault()
-    let titleInput: HTMLInputElement = <HTMLInputElement>document.getElementsByName('title')[0]
-    let title: string = ''
-    if (titleInput) {
-        title = titleInput.value
-    }
-
-    const create_chatResult = (await fetch(`${host}/chats`, {
-        method: 'POST',
-        credentials: 'include',
-        mode: 'cors',
-        headers: {
-            'content-type': 'application/json',
-        },
-        body: JSON.stringify({ title }),
-    }))
-
-    if (create_chatResult.status !== 200) {
-        const error = await create_chatResult.json()
-        alert(error.reason)
-        return
-    }
-
-    const chatsResult = await fetch(`${host}/chats`, {
-        method: 'GET',
-        mode: 'cors',
-        credentials: 'include',
-    })
-
-    state.chats = await chatsResult.json()
-
-    Router.get().to('/messenger')
-
-}
+// export async function create_chat (e: Event) {
+//     e.preventDefault()
+//     let titleInput: HTMLInputElement = <HTMLInputElement>document.getElementsByName('title')[0]
+//     let title: string = ''
+//     if (titleInput) {
+//         title = titleInput.value
+//     }
+//     //body: JSON.stringify({ title })
+//
+//     postChats(title).then(getChats)
+//
+// }
+// export async function postChats (title) {
+//
+//     const HTTP = new HttpTransport()
+//     HTTP.post(`${host}/chats`, { data: JSON.stringify({ title: title }) })
+//         .then(
+//             (data: XMLHttpRequest) => {
+//                 if (data.status !== 200) {
+//                     alert(data.response.reason)
+//                 } else {
+//                     console.log(data.response)
+//                 }
+//             }
+//         )
+// }
 
 export async function selectChat (chat: Chat) {
     const onMessage = (message: string) => {
@@ -93,9 +84,9 @@ export async function getChats () {
             (data: XMLHttpRequest) => {
                 if (data.status !== 200) {
                     alert(data.response.reason)
-                    //Router.get().to('/')
                 } else {
                     state.chats = data.response
+                    Router.get().to('/messenger')
                 }
             }
         )
@@ -109,7 +100,6 @@ export async function getUser () {
                     alert(data.response.reason)
                 } else {
                     state.user = data.response
-                    Router.get().to('/messenger')
                 }
             }
         )
