@@ -85,13 +85,17 @@ export async function sendMessage (e) {
 }
 
 export async function getData () {
-    const chatsResult = await fetch(`${host}/chats`, {
-        method: 'GET',
-        mode: 'cors',
-        credentials: 'include',
-    })
+    // const chatsResult = await fetch(`${host}/chats`, {
+    //     method: 'GET',
+    //     mode: 'cors',
+    //     credentials: 'include',
+    // })
+    //
+    // state.chats = await chatsResult.json()
 
-    state.chats = await chatsResult.json()
+    const chatsResult = new HttpTransport().get(`${host}/auth/user`, {})
+
+    state.chats = await errorWrapper(chatsResult)
 
     // const userResult = await fetch(`${host}/auth/user`, {
     //     method: 'GET',
@@ -101,9 +105,9 @@ export async function getData () {
     //
     // state.user = await userResult.json()
 
-    const response = new HttpTransport().get(`${host}/auth/user`, {})
+    const userResult = new HttpTransport().get(`${host}/auth/user`, {})
 
-    state.user = await errorWrapper(response)
+    state.user = await errorWrapper(userResult)
 
     Router.get().to('/messenger')
 }
