@@ -5,26 +5,28 @@ import { Sidebar } from './Sidebar'
 import { ChatPageWithChat } from './ChatPageWithChat'
 import { Popup } from './Popup'
 
+
 export default function ChatPage () {
-    if (!state.user.id) {
-        getData().then(() => {
-            if (localStorage.currentChat && !state.currentChat) {
-                selectChat(JSON.parse(localStorage.currentChat))
-            }
-        })
-    }
+    // if (!state.user.id) {
+    //     getData().then(() => {
+    //         console.log(localStorage.currentChat, state.currentChat )
+    //         if (localStorage.currentChat && !state.currentChat) {
+    //             selectChat(JSON.parse(localStorage.currentChat))
+    //         }
+    //     })
+    // }
 
     const getChildren = (state) => {
         if (state.currentChat) {
             return [
                 VDom.createElement(Sidebar, { chats: state.chats }),
-                VDom.createElement(ChatPageWithChat),
-                VDom.createElement(Popup)
+                VDom.createElement(ChatPageWithChat, {}),
+                VDom.createElement(Popup, {})
             ]
         }
         return [
             VDom.createElement(Sidebar, { chats: state.chats }),
-            VDom.createElement(Popup)
+            VDom.createElement(Popup, {})
         ]
     }
     const children = getChildren(state)

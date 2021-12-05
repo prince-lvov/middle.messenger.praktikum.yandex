@@ -41,7 +41,7 @@ export async function selectChat (chat: Chat) {
     }
 
     state.messages = []
-
+    console.log(chat)
     state.currentChat = chat //Добавляем конкретный чат в state
 
     const tokenResult = await fetch(`${host}/chats/token/${chat.id}`, {
@@ -51,12 +51,16 @@ export async function selectChat (chat: Chat) {
     })
 
     const token = await tokenResult.json()
-    const user = state.user as User
+
+    //const user = state.user as User
+
     state.currentChat = chat
-    state.webSocket = new WebSocket(user.id, chat.id, token.token, onMessage, (v) => { v.getOld() })
+
+    state.webSocket = new WebSocket(state.user.id, chat.id, token.token, onMessage, (v) => { v.getOld() })
 
     await WhoInThisChat(chat.id)
 
+    console.log(chat, JSON.stringify(chat))
     localStorage.currentChat = JSON.stringify(chat)
 
     Router.get().to('/messenger')
@@ -74,32 +78,40 @@ export async function sendMessage (e: Event) {
     state.webSocket.send(message)
 }
 export async function getData () {
-    getChats().then(getUser)
+
+    getUser().then(getChats).then(function (){
+        Router.get().to('/messenger')
+        console.log('Привет')}
+    )
+
+
 }
 
 export async function getChats () {
     const HTTP = new HttpTransport()
-    HTTP.get(`${host}/chats`, {})
+    return HTTP.get(`${host}/chats`, {})
         .then(
             (data: XMLHttpRequest) => {
                 if (data.status !== 200) {
                     alert(data.response.reason)
                 } else {
                     state.chats = data.response
-                    Router.get().to('/messenger')
+                    console.log(state.chats)
+                    //Router.get().to('/messenger')
                 }
             }
         )
 }
 export async function getUser () {
     const HTTP = new HttpTransport()
-    HTTP.get(`${host}/auth/user`, {})
+    return HTTP.get(`${host}/auth/user`, {})
         .then(
             (data: XMLHttpRequest) => {
                 if (data.status !== 200) {
                     alert(data.response.reason)
                 } else {
                     state.user = data.response
+                    console.log(state.user)
                 }
             }
         )
