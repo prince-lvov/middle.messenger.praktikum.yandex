@@ -93,14 +93,6 @@ class HttpTransport {
     };
 }
 
-export async function errorWrapper (response: Promise<XMLHttpRequest>)  {
 
-    const data = await response
 
-    if (data.status !== 200) {
-        alert(data.response.reason)
-    } else {
-        return data.response
-    }
-}
 

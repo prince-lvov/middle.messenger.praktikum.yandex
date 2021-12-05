@@ -4,7 +4,7 @@ export const state = {
     chats: [],
     user: {},
     messages: [],
-    // currentChat: {},
+    currentChat: {},
     userInChat:{},
     OnlyUsersInChatAlready: '',
     webSocket: null

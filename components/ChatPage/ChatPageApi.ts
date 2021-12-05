@@ -2,14 +2,14 @@ import { state } from '../../my_core/core'
 import Router from '../../my_core/router'
 import WebSocket from '../../my_core/WebSocket'
 import HttpTransport from '../../my_core/HttpTransport'
-import errorWrapper from '../../my_core/HttpTransport'
+import { Chat, User } from './types'
 
 const host = 'https://ya-praktikum.tech/api/v2'
 
-export async function create_chat (e) {
+export async function create_chat (e: Event) {
     e.preventDefault()
-    let titleInput = document.getElementsByName('title')[0]
-    let title = ''
+    let titleInput: HTMLInputElement = <HTMLInputElement>document.getElementsByName('title')[0]
+    let title: string = ''
     if (titleInput) {
         title = titleInput.value
     }
@@ -42,8 +42,8 @@ export async function create_chat (e) {
 
 }
 
-export async function selectChat (chat) {
-    const onMessage = (message) => {
+export async function selectChat (chat: Chat) {
+    const onMessage = (message: string) => {
         const messages = JSON.parse(message)
         Array.isArray(messages) ? state.messages.push(...messages.reverse()) : state.messages.push(messages)
         Router.get().to('/messenger')
@@ -60,9 +60,9 @@ export async function selectChat (chat) {
     })
 
     const token = await tokenResult.json()
-
+    const user = state.user as User
     state.currentChat = chat
-    state.webSocket = new WebSocket(state.user.id, chat.id, token.token, onMessage, (v) => { v.getOld() })
+    state.webSocket = new WebSocket(user.id, chat.id, token.token, onMessage, (v) => { v.getOld() })
 
     await WhoInThisChat(chat.id)
 
@@ -72,48 +72,53 @@ export async function selectChat (chat) {
 
 }
 
-export async function sendMessage (e) {
+export async function sendMessage (e: Event) {
     e.preventDefault()
-    let messageInput = (document.getElementsByName('message')[0])
-    let message = ''
+    let messageInput = <HTMLInputElement> document.getElementsByName('message')[0]
+    let message: string = ''
     if (messageInput) {
         message = messageInput.value
     }
 
-
     state.webSocket.send(message)
 }
-
 export async function getData () {
-    // const chatsResult = await fetch(`${host}/chats`, {
-    //     method: 'GET',
-    //     mode: 'cors',
-    //     credentials: 'include',
-    // })
-    //
-    // state.chats = await chatsResult.json()
-
-    const chatsResult = new HttpTransport().get(`${host}/auth/user`, {})
-
-    state.chats = await errorWrapper(chatsResult)
-
-    // const userResult = await fetch(`${host}/auth/user`, {
-    //     method: 'GET',
-    //     mode: 'cors',
-    //     credentials: 'include',
-    // })
-    //
-    // state.user = await userResult.json()
-
-    const userResult = new HttpTransport().get(`${host}/auth/user`, {})
-
-    state.user = await errorWrapper(userResult)
-
-    Router.get().to('/messenger')
+    getChats().then(getUser)
 }
-export async function ChoiceAction (e) {
+
+export async function getChats () {
+    const HTTP = new HttpTransport()
+    HTTP.get(`${host}/chats`, {})
+        .then(
+            (data: XMLHttpRequest) => {
+                if (data.status !== 200) {
+                    alert(data.response.reason)
+                    //Router.get().to('/')
+                } else {
+                    state.chats = data.response
+                }
+            }
+        )
+}
+export async function getUser () {
+    const HTTP = new HttpTransport()
+    HTTP.get(`${host}/auth/user`, {})
+        .then(
+            (data: XMLHttpRequest) => {
+                if (data.status !== 200) {
+                    alert(data.response.reason)
+                } else {
+                    state.user = data.response
+                    Router.get().to('/messenger')
+                }
+            }
+        )
+}
+//Router.get().to('/messenger')
+
+export async function ChoiceAction (e: Event) {
     e.preventDefault()
-    const choiceButton = document.querySelector('.choice_button').textContent
+    const choiceButton: string = document.querySelector('.choice_button').textContent
     if (choiceButton === 'Добавить') {
         await AddOrDeleteUserToChat(e, 'PUT')
     } else {
@@ -122,11 +127,11 @@ export async function ChoiceAction (e) {
 }
 
 
-export async function AddOrDeleteUserToChat (e, choice) {
+export async function AddOrDeleteUserToChat (e: Event, choice: string) {
     e.preventDefault()
-    const loginDiv = document.querySelector('.chat-action-popup')
-    const loginInput = loginDiv.getElementsByTagName('input')[0]
-    const login = loginInput.value
+    const loginDiv: HTMLElement = document.querySelector('.chat-action-popup')
+    const loginInput: HTMLInputElement = loginDiv.getElementsByTagName('input')[0]
+    const login: string = loginInput.value
 
     const SearchUserByLogin = (await fetch(`${host}/user/search`, {
         method: 'POST',
