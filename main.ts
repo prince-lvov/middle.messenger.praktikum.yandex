@@ -32,3 +32,34 @@ Router.get()
         name: 'index',
         path: '/'
     }).render()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

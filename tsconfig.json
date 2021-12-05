@@ -1,9 +1,14 @@
 {
     "compilerOptions": {
-        "outDir": "./lib",
-        "rootDir": "../",
+        "outDir": "./dist",
+     //   "rootDir": "../",
         "noEmit": true,
-        "skipLibCheck": true
+        "skipLibCheck": true,
+        "target": "es2016",
+        "declaration": false,
+        "module": "commonjs",
+        "strictNullChecks": true,
+        "sourceMap": true
     },
     "include": ["src/**/*",
         "src/index.spec.ts"

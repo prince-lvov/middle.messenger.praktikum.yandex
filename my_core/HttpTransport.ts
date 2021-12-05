@@ -32,23 +32,23 @@ function queryStringify(data: IHeaders):string {
 
 class HttpTransport {
     get(url: string, options: OptionWithoutMethod = {}): Promise<XMLHttpRequest> {
-        return this.request(url, {...options, method: METHODS.GET}, options.timeout)
+        return this.request(url, { ...options, method: METHODS.GET }, options.timeout)
     }
 
     post(url: string, options:OptionWithoutMethod = {}): Promise<XMLHttpRequest>{
-        return this.request(url, {...options, method: METHODS.POST}, options.timeout);
+        return this.request(url, { ...options, method: METHODS.POST }, options.timeout);
     };
 
     put(url: string, options:OptionWithoutMethod = {}): Promise<XMLHttpRequest> {
-        return this.request(url, {...options, method: METHODS.PUT}, options.timeout);
+        return this.request(url, { ...options, method: METHODS.PUT }, options.timeout);
     };
 
     delete(url: string, options:OptionWithoutMethod = {}): Promise<XMLHttpRequest> {
-        return this.request(url, {...options, method: METHODS.DELETE}, options.timeout);
+        return this.request(url, { ...options, method: METHODS.DELETE }, options.timeout);
     };
 
     request(url: string, options: Options = { method: METHODS.GET }, timeout = 5000): Promise<XMLHttpRequest> {
-        const {headers = {}, method, data} = options;
+        const { headers = {}, method, data } = options;
 
         return new Promise(function(resolve, reject) {
             if (!method) {
@@ -57,6 +57,7 @@ class HttpTransport {
             }
 
             const xhr = new XMLHttpRequest();
+            xhr.responseType = 'json'
             const isGet = method === METHODS.GET;
 
             xhr.open(
@@ -65,6 +66,9 @@ class HttpTransport {
                     ? `${url}${queryStringify(data)}`
                     : url,
             );
+
+            xhr.withCredentials = true
+            xhr.setRequestHeader('content-type', 'application/json');
 
             Object.keys(headers).forEach(key => {
                 xhr.setRequestHeader(key, headers[key]);
@@ -89,11 +93,14 @@ class HttpTransport {
     };
 }
 
-// console.log(new HTTPTransport().get('https://reqres.in/api/users/2', { method: METHOD.GET, data: JSON.stringify({ title: 'Мой чат', }) }))
+export async function errorWrapper (response: Promise<XMLHttpRequest>)  {
 
-// const response = new Response();
-// const TestErr = new Promise((resolve, reject) => {
-//     new HTTPTransport().get('https://reqres.in/api/users/2', {timeout: 6000, data: {}, headers: {'Content-Type': 'text/plain'} })
-//         .then((xhr) => resolve(new Response(xhr)))
-// })
-// console.log(TestErr)
+    const data = await response
+
+    if (data.status !== 200) {
+        alert(data.response.reason)
+    } else {
+        return data.response
+    }
+}
+

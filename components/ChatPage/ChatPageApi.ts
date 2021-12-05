@@ -1,6 +1,8 @@
 import { state } from '../../my_core/core'
 import Router from '../../my_core/router'
 import WebSocket from '../../my_core/WebSocket'
+import HttpTransport from '../../my_core/HttpTransport'
+import errorWrapper from '../../my_core/HttpTransport'
 
 const host = 'https://ya-praktikum.tech/api/v2'
 
@@ -91,13 +93,17 @@ export async function getData () {
 
     state.chats = await chatsResult.json()
 
-    const userResult = await fetch(`${host}/auth/user`, {
-        method: 'GET',
-        mode: 'cors',
-        credentials: 'include',
-    })
+    // const userResult = await fetch(`${host}/auth/user`, {
+    //     method: 'GET',
+    //     mode: 'cors',
+    //     credentials: 'include',
+    // })
+    //
+    // state.user = await userResult.json()
 
-    state.user = await userResult.json()
+    const response = new HttpTransport().get(`${host}/auth/user`, {})
+
+    state.user = await errorWrapper(response)
 
     Router.get().to('/messenger')
 }
