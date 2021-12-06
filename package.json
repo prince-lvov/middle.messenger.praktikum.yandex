@@ -43,8 +43,7 @@
   "dependencies": {
     "chai-http": "^4.3.0",
     "express": "^4.17.1",
-    "jsdom-global": "^3.0.2",
-    "node-sass": "^7.0.0"
+    "jsdom-global": "^3.0.2"
   },
   "keywords": [],
   "description": ""
