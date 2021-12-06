@@ -68,7 +68,7 @@ function sync (virtualNode, realNode) {
     if (virtualNode.key) {
         realNode.dataset.key = virtualNode.key
     }
-    if (typeof virtualNode !== 'object' && virtualNode !== realNode.nodeValue) {
+    if (virtualNode && typeof virtualNode !== 'object' && virtualNode !== realNode.nodeValue) {
         realNode.nodeValue = virtualNode
     }
 

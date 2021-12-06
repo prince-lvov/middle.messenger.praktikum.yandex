@@ -8,7 +8,8 @@
     "start": "concurrently \"parcel index.pug\" \"node ./my_core/server.ts\"",
     "watch": "parcel serve --host 0.0.0.0 pug/index.pug old_template/login.pug pug/chat-page.pug",
     "build": "parcel build pug/index.pug pug/index2.pug old_template/chat-page.pug",
-    "dev": "parcel index.pug --port 3000 --no-cache"
+    "dev": "parcel index.pug --port 3000 --no-cache",
+    "sass": "node-sass sass -o css"
   },
   "directories": {
     "src": "./src",
@@ -45,7 +46,8 @@
   "dependencies": {
     "chai-http": "^4.3.0",
     "express": "^4.17.1",
-    "jsdom-global": "^3.0.2"
+    "jsdom-global": "^3.0.2",
+    "node-sass": "^7.0.0"
   },
   "keywords": [],
   "description": "Ссылка на Pull request Sprint 2: https://github.com/prince-lvov/middle.messenger.praktikum.yandex/pull/8\r Домен из Netlify:https://youthful-torvalds-a84faf.netlify.app\r https://www.figma.com/file/3tu2tLzr8jBasqiMk3vtJ7/Messenger%2B?node-id=96%3A343",

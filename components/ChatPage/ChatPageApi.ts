@@ -6,32 +6,32 @@ import { Chat, User } from './types'
 
 const host = 'https://ya-praktikum.tech/api/v2'
 
-// export async function create_chat (e: Event) {
-//     e.preventDefault()
-//     let titleInput: HTMLInputElement = <HTMLInputElement>document.getElementsByName('title')[0]
-//     let title: string = ''
-//     if (titleInput) {
-//         title = titleInput.value
-//     }
-//     //body: JSON.stringify({ title })
-//
-//     postChats(title).then(getChats)
-//
-// }
-// export async function postChats (title) {
-//
-//     const HTTP = new HttpTransport()
-//     HTTP.post(`${host}/chats`, { data: JSON.stringify({ title: title }) })
-//         .then(
-//             (data: XMLHttpRequest) => {
-//                 if (data.status !== 200) {
-//                     alert(data.response.reason)
-//                 } else {
-//                     console.log(data.response)
-//                 }
-//             }
-//         )
-// }
+export async function create_chat (e: Event) {
+    e.preventDefault()
+    let titleInput: HTMLInputElement = <HTMLInputElement>document.getElementsByName('title')[0]
+    let title: string = ''
+    if (titleInput) {
+        title = titleInput.value
+    }
+    //body: JSON.stringify({ title })
+
+    postChats(title).then(getChats)
+
+}
+export async function postChats (title) {
+
+    const HTTP = new HttpTransport()
+    HTTP.post(`${host}/chats`, { data: JSON.stringify({ title: title }) })
+        .then(
+            (data: XMLHttpRequest) => {
+                if (data.status !== 200) {
+                    alert(data.response.reason)
+                } else {
+                    console.log(data.response)
+                }
+            }
+        )
+}
 
 export async function selectChat (chat: Chat) {
     const onMessage = (message: string) => {
@@ -41,7 +41,7 @@ export async function selectChat (chat: Chat) {
     }
 
     state.messages = []
-    console.log(chat)
+
     state.currentChat = chat //Добавляем конкретный чат в state
 
     const tokenResult = await fetch(`${host}/chats/token/${chat.id}`, {
@@ -60,7 +60,6 @@ export async function selectChat (chat: Chat) {
 
     await WhoInThisChat(chat.id)
 
-    console.log(chat, JSON.stringify(chat))
     localStorage.currentChat = JSON.stringify(chat)
 
     Router.get().to('/messenger')
@@ -79,12 +78,10 @@ export async function sendMessage (e: Event) {
 }
 export async function getData () {
 
-    getUser().then(getChats).then(function (){
+    getUser().then(getChats).then(function () {
         Router.get().to('/messenger')
-        console.log('Привет')}
+        }
     )
-
-
 }
 
 export async function getChats () {
@@ -96,8 +93,6 @@ export async function getChats () {
                     alert(data.response.reason)
                 } else {
                     state.chats = data.response
-                    console.log(state.chats)
-                    //Router.get().to('/messenger')
                 }
             }
         )
@@ -111,12 +106,11 @@ export async function getUser () {
                     alert(data.response.reason)
                 } else {
                     state.user = data.response
-                    console.log(state.user)
+
                 }
             }
         )
 }
-//Router.get().to('/messenger')
 
 export async function ChoiceAction (e: Event) {
     e.preventDefault()

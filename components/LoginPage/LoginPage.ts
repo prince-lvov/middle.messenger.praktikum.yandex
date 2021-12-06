@@ -2,7 +2,6 @@ import { VDom } from '../../my_core/VDom'
 import { RouterLink } from '../../my_core/router'
 import { login } from './LoginPageApi'
 
-
 export default function LoginPage () {
     return VDom.createElement('div', { className: 'site-wrapper hi-contrast-bg' },
         VDom.createElement('div', { className: 'modal' },

@@ -7,14 +7,13 @@ import { Popup } from './Popup'
 
 
 export default function ChatPage () {
-    // if (!state.user.id) {
-    //     getData().then(() => {
-    //         console.log(localStorage.currentChat, state.currentChat )
-    //         if (localStorage.currentChat && !state.currentChat) {
-    //             selectChat(JSON.parse(localStorage.currentChat))
-    //         }
-    //     })
-    // }
+    if (!state.user.id) {
+        getData().then(() => {
+            if (localStorage.currentChat && !state.currentChat) {
+                selectChat(JSON.parse(localStorage.currentChat))
+            }
+        })
+    }
 
     const getChildren = (state) => {
         if (state.currentChat) {
