@@ -8,8 +8,7 @@
     "start": "concurrently \"parcel index.pug\" \"node ./my_core/server.ts\"",
     "watch": "parcel serve --host 0.0.0.0 pug/index.pug old_template/login.pug pug/chat-page.pug",
     "build": "parcel build pug/index.pug pug/index2.pug old_template/chat-page.pug",
-    "dev": "parcel index.pug --port 3000 --no-cache",
-    "sass": "node-sass sass -o css"
+    "dev": "parcel index.pug --port 3000 --no-cache"
   },
   "directories": {
     "src": "./src",
