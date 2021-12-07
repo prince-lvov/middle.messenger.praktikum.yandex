@@ -1,16 +1,17 @@
 {
-  "compilerOptions": {
-    "target": "es2015",
-    "module": "es2015",
-    "lib": ["dom"],
-    "declaration": false,
-    "sourceMap": true,
-    "noImplicitAny": true,
-    "strictNullChecks": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
-  }
+    "compilerOptions": {
+        "outDir": "./dist",
+     //   "rootDir": "../",
+        "noEmit": true,
+        "skipLibCheck": true,
+        "target": "es2016",
+        "declaration": false,
+        "module": "commonjs",
+        "strictNullChecks": true,
+        "sourceMap": true
+    },
+    "include": ["src/**/*",
+        "src/index.spec.ts"
+    ],
+    "exclude": ["node_modules"]
 }

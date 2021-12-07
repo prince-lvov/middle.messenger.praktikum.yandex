@@ -2,7 +2,7 @@ aside
 	width: 100%
 	height: 100vh
 	background-color: rgba(255, 255, 255, 0.8)
-	--asideHeaderheight: 102px
+	--asideHeaderheight: 140px
 
 	header
 		display: grid
@@ -13,6 +13,10 @@ aside
 		align-items: center
 		padding: 10px
 		border-bottom: 1px solid rgba(0, 0, 0, 0.8)
+
+		button
+			@include GreenButton
+
 
 		a.profile
 			align-self: start

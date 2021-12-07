@@ -1,7 +1,12 @@
 {
+  //"parser": "babel-eslint",
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
   "rules": {
     "no-unused-vars": 2,
-    "max-len": [1, 100],
-    "max-params": [2, 3]
+    "max-len": [1, 200],
+    "max-params": [2, 3],
+    "quotes": ["error", "single"],
+    "object-curly-spacing": ["error", "always", { "arraysInObjects": false, "objectsInObjects": false}]
   }
 }
