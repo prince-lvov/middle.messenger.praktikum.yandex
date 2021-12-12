@@ -5,12 +5,12 @@ const host = 'https://ya-praktikum.tech/api/v2'
 
 export async function save (e) {
     e.preventDefault()
-    const first_name = (document.getElementsByName('first_name')[0]).value
-    const second_name = (document.getElementsByName('second_name')[0]).value
-    const login = (document.getElementsByName('login')[0]).value
-    const email = (document.getElementsByName('email')[0]).value
-    const phone = (document.getElementsByName('phone')[0]).value
-    const display_name = (document.getElementsByName('display_name')[0]).value
+    const first_name = (document.getElementsByName('first_name')[0] as HTMLInputElement).value
+    const second_name = (document.getElementsByName('second_name')[0] as HTMLInputElement).value
+    const login = (document.getElementsByName('login')[0] as HTMLInputElement).value
+    const email = (document.getElementsByName('email')[0] as HTMLInputElement).value
+    const phone = (document.getElementsByName('phone')[0] as HTMLInputElement).value
+    const display_name = (document.getElementsByName('display_name')[0] as HTMLInputElement).value
 
     const saveResult = (await fetch(`${host}/user/profile`, {
         method: 'PUT',
@@ -37,12 +37,14 @@ export async function save (e) {
 
     alert('Успешно сохранено!')
 
-    state.user.first_name = first_name
-    state.user.seconds_name = second_name
-    state.user.display_name = display_name
-    state.user.login = login
-    state.user.email = email
-    state.user.phone = phone
+    const user = state.user as any
+
+    user.first_name = first_name
+    user.seconds_name = second_name
+    user.display_name = display_name
+    user.login = login
+    user.email = email
+    user.phone = phone
 }
 
 export async function getDataProfile () {
@@ -63,7 +65,10 @@ export async function loadAvatar (e) {
     formData.append('avatar', file)
     const response = await fetch(host + '/user/profile/avatar', { method: 'PUT', mode: 'cors', credentials: 'include', body: formData })
     const result = await response.json()
-    state.user.avatar = result.avatar
+
+    const user = state.user as any
+
+    user.avatar = result.avatar
     Router.get().to('/settings')
 }
 

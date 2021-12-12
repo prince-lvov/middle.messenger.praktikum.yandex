@@ -1,3 +1,8 @@
+import './styles/index.sass'
+import './styles/chatPage.sass'
+import './styles/profile.sass'
+import './styles/common.sass'
+
 import ChatPage from './components/ChatPage/ChatPage'
 import ProfilePage from './components/ProfilePage/ProfilePage'
 import RegisterPage from './components/RegisterPage/RegisterPage'
@@ -32,33 +37,3 @@ Router.get()
         name: 'index',
         path: '/'
     }).render()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

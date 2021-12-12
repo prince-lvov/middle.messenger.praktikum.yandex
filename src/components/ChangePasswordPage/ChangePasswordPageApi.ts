@@ -2,8 +2,8 @@ const host = 'https://ya-praktikum.tech/api/v2'
 
 export async function change_password (e) {
     e.preventDefault()
-    const oldPassword = (document.getElementsByName('oldPassword')[0]).value
-    const newPassword = (document.getElementsByName('newPassword')[0]).value
+    const oldPassword = (document.getElementsByName('oldPassword')[0] as HTMLInputElement).value
+    const newPassword = (document.getElementsByName('newPassword')[0] as HTMLInputElement).value
 
     const change_passwordResult = (await fetch(`${host}/user/password`, {
         method: 'PUT',

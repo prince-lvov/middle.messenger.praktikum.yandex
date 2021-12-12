@@ -5,7 +5,7 @@ export function InitSubmenu () {
         triggerEl.classList.toggle('open')
     }
 
-    const actionFormValues = {
+    const actionFormValues: { [code: string]: any} = {
         addUser: {
             formTitle: 'Добавить пользователя',
             buttonValue: 'Добавить'
@@ -20,13 +20,14 @@ export function InitSubmenu () {
         }
     }
 
+    //@ts-ignore
     const children = document.querySelector('.submenu').querySelectorAll('li')
     const actionTriggerEls = Array.from(children)
 
     if (actionTriggerEls !== null) {
-        actionTriggerEls.forEach(actionTrigger => {
+        actionTriggerEls.forEach((actionTrigger:any) => {
             actionTrigger.addEventListener('click', () => {
-                const action = actionTrigger.dataAction
+                const action: string = actionTrigger.dataAction
                 const availableActions = Object.keys(actionFormValues)
                 if (!action || !availableActions.includes(action)) {
                     return true
@@ -34,7 +35,7 @@ export function InitSubmenu () {
                 const title = actionFormValues[action].formTitle
                 const buttonValue = actionFormValues[action].buttonValue
 
-                const popup = document.querySelector('.chat-action-popup')
+                const popup: any = document.querySelector('.chat-action-popup')
                 popup.querySelector('.h2').innerText = title
                 popup.getElementsByTagName('button')[0].textContent = buttonValue
                 popup.classList.add('open')

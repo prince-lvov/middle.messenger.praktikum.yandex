@@ -1,3 +1,7 @@
+import '../../styles/index.sass'
+import '../../styles/chatPage.sass'
+import '../../styles/profile.sass'
+import '../../styles/common.sass'
 import { VDom } from '../../my_core/VDom'
 import { RouterLink } from '../../my_core/router'
 import { register } from './RegisterPageApi'

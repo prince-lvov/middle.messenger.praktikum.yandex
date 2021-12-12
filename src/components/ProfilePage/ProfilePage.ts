@@ -2,6 +2,7 @@ import { VDom } from '../../my_core/VDom'
 import { state } from '../../my_core/core'
 import { save, loadAvatar, logout, getDataProfile } from './ProfilePageApi'
 import Router from '../../my_core/router'
+import {getData, selectChat} from "../ChatPage/ChatPageApi";
 
 export default function ProfilePage () {
 
@@ -22,7 +23,12 @@ export default function ProfilePage () {
     return VDom.createElement('div', { className: 'site-wrapper profile-view' },
         VDom.createElement('a', { className: 'back-link', onclick: (e) => {
                     e.preventDefault()
-                    Router.get().to('/messenger')
+                    getData().then(() => {
+                        if (localStorage.currentChat && !state.currentChat.id) {
+                            selectChat(JSON.parse(localStorage.currentChat))
+                        }
+                    })
+                    //Router.get().to('/messenger')
                 } },
             VDom.createElement('div', { className: 'arrow' },
                 VDom.createElement('img', { src: require('../../images/back-arrow.svg'), alt: '' }))

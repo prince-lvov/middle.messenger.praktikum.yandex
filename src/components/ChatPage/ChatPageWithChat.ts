@@ -6,9 +6,9 @@ import { InitSubmenu } from './InitSubmenu'
 export function ChatPageWithChat () {
     return VDom.createElement('main', { },
         VDom.createElement('div', { className: 'chat-messages--parent' },
-            VDom.createElement(ChatHeader),
-            VDom.createElement(InputArea),
-            VDom.createElement(MessagesBody)
+            VDom.createElement(ChatHeader, {}),
+            VDom.createElement(InputArea, {}),
+            VDom.createElement(MessagesBody, {})
         ),
     )
 }

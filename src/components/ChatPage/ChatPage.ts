@@ -9,7 +9,7 @@ import { Popup } from './Popup'
 export default function ChatPage () {
     if (!state.user.id) {
         getData().then(() => {
-            if (localStorage.currentChat && !state.currentChat) {
+            if (localStorage.currentChat && !state.currentChat.id) {
                 selectChat(JSON.parse(localStorage.currentChat))
             }
         })

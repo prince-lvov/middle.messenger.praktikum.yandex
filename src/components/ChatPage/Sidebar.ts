@@ -4,7 +4,7 @@ import { create_chat, selectChat } from './ChatPageApi'
 
 export function Sidebar ({ chats }) {
     return VDom.createElement('aside', {},
-        VDom.createElement(SidebarHeader),
+        VDom.createElement(SidebarHeader, {}),
         VDom.createElement(ChatListArea, { chats }),
     )
 }
@@ -17,7 +17,7 @@ function SidebarHeader () {
                 } },
             'Профиль',
             VDom.createElement('img', { src: require('../../images/round-arrow.svg'), alt: '' })),
-        VDom.createElement(SidebarSearch),
+        VDom.createElement(SidebarSearch, {}),
         VDom.createElement('button', { onclick: create_chat }, 'Добавить чат')
     )
 }

@@ -1,12 +1,23 @@
 import { VDom } from './VDom'
+import {Chat} from "../components/ChatPage/types";
 
-export const state = {
+export const state: {
+    chats: Chat[],
+    user: any,
+    messages: any[],
+    currentChat: any,
+    userInChat: any,
+    OnlyUsersInChatAlready: any,
+    usersInChatAlready: any,
+    webSocket: any
+} = {
     chats: [],
     user: {},
     messages: [],
     currentChat: {},
     userInChat:{},
     OnlyUsersInChatAlready: '',
+    usersInChatAlready: null,
     webSocket: null
 }
 

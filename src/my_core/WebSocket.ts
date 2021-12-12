@@ -54,6 +54,7 @@ class WebSocketService {
         
         if (state.webSocket) state.webSocket.socket.close()
         if (interval) clearInterval(interval)
+        //@ts-ignore
         interval = setInterval(() => { this.socket.send(pingMessage) }, 10000)
     }
 

@@ -5,8 +5,8 @@ import { assert } from 'chai'
 import { JSDOM } from 'jsdom'
 
 const dom = new JSDOM('<!DOCTYPE html><div class="app"></div>');
-global.document = dom.window.document;
-global.window = global.document.defaultView;
+//global.document = dom.window.document;
+//global.window = global.document.defaultView;
 
 describe('Router test', () => {
 

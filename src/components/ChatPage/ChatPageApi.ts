@@ -2,7 +2,7 @@ import { state } from '../../my_core/core'
 import Router from '../../my_core/router'
 import WebSocket from '../../my_core/WebSocket'
 import HttpTransport from '../../my_core/HttpTransport'
-import { Chat, User } from './types'
+import { Chat } from './types'
 
 const host = 'https://ya-praktikum.tech/api/v2'
 
@@ -13,9 +13,8 @@ export async function create_chat (e: Event) {
     if (titleInput) {
         title = titleInput.value
     }
-    //body: JSON.stringify({ title })
 
-    postChats(title).then(getChats)
+    postChats(title).then(getChats).then(() => { Router.get().to('/messenger') })
 
 }
 export async function postChats (title) {
@@ -42,7 +41,7 @@ export async function selectChat (chat: Chat) {
 
     state.messages = []
 
-    state.currentChat = chat //Добавляем конкретный чат в state
+    state.currentChat = chat
 
     const tokenResult = await fetch(`${host}/chats/token/${chat.id}`, {
         method: 'POST',
@@ -51,8 +50,6 @@ export async function selectChat (chat: Chat) {
     })
 
     const token = await tokenResult.json()
-
-    //const user = state.user as User
 
     state.currentChat = chat
 
@@ -77,43 +74,54 @@ export async function sendMessage (e: Event) {
     state.webSocket.send(message)
 }
 export async function getData () {
+    return new Promise<void> ((resolve, reject) => {
+        getUser().then(getChats).then(function () {
+                Router.get().to('/messenger')
+                resolve()
+            }
+        )
+    })
 
-    getUser().then(getChats).then(function () {
-        Router.get().to('/messenger')
-        }
-    )
 }
 
 export async function getChats () {
     const HTTP = new HttpTransport()
-    return HTTP.get(`${host}/chats`, {})
-        .then(
-            (data: XMLHttpRequest) => {
-                if (data.status !== 200) {
-                    alert(data.response.reason)
-                } else {
-                    state.chats = data.response
+    return new Promise<void>((resolve, reject) => {
+        HTTP.get(`${host}/chats`, {})
+            .then(
+                (data: XMLHttpRequest) => {
+                    if (data.status !== 200) {
+                        alert(data.response.reason)
+                        reject()
+                    } else {
+                        state.chats = data.response
+                        resolve()
+                    }
                 }
-            }
-        )
+            )
+    })
 }
 export async function getUser () {
     const HTTP = new HttpTransport()
-    return HTTP.get(`${host}/auth/user`, {})
-        .then(
-            (data: XMLHttpRequest) => {
-                if (data.status !== 200) {
-                    alert(data.response.reason)
-                } else {
-                    state.user = data.response
-
+    return new Promise<void> ((resolve, reject) => {
+        HTTP.get(`${host}/auth/user`, {})
+            .then(
+                (data: XMLHttpRequest) => {
+                    if (data.status !== 200) {
+                        alert(data.response.reason)
+                        reject()
+                    } else {
+                        state.user = data.response
+                        resolve()
+                    }
                 }
-            }
-        )
+            )
+    })
 }
 
 export async function ChoiceAction (e: Event) {
     e.preventDefault()
+    //@ts-ignore
     const choiceButton: string = document.querySelector('.choice_button').textContent
     if (choiceButton === 'Добавить') {
         await AddOrDeleteUserToChat(e, 'PUT')
@@ -125,6 +133,7 @@ export async function ChoiceAction (e: Event) {
 
 export async function AddOrDeleteUserToChat (e: Event, choice: string) {
     e.preventDefault()
+    //@ts-ignore
     const loginDiv: HTMLElement = document.querySelector('.chat-action-popup')
     const loginInput: HTMLInputElement = loginDiv.getElementsByTagName('input')[0]
     const login: string = loginInput.value
@@ -147,6 +156,7 @@ export async function AddOrDeleteUserToChat (e: Event, choice: string) {
 
     const SearchUserByLoginResult = await SearchUserByLogin.json()
     const users = []
+    //@ts-ignore
     users.push(SearchUserByLoginResult[0].id)
     state.userInChat = SearchUserByLoginResult[0]
 
@@ -170,7 +180,7 @@ export async function AddOrDeleteUserToChat (e: Event, choice: string) {
         alert(error.reason)
         return
     }
-
+    //@ts-ignore
     document.querySelector('.chat-action-popup').classList.remove('open')
 
     await selectChat(state.currentChat)
