@@ -20,22 +20,27 @@ export async function register (e) {
     const password2Input = (document.getElementsByName('password2')[0])as HTMLInputElement
     const password2 = password2Input.value
 
-    const registerResult = (await fetch(`${host}/auth/signup`, {
-        method: 'POST',
-        credentials: 'include',
-        mode: 'cors',
-        headers: {
-            'content-type': 'application/json',
-        },
-        body: JSON.stringify({
-            first_name,
-            second_name,
-            login,
-            email,
-            phone,
-            password: password1
-        }),
-    }))
+    let registerResult
+    try {
+        registerResult = (await fetch(`${host}/auth/signup`, {
+            method: 'POST',
+            credentials: 'include',
+            mode: 'cors',
+            headers: {
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify({
+                first_name,
+                second_name,
+                login,
+                email,
+                phone,
+                password: password1
+            }),
+        }))
+    }catch(error) {
+        console.log('Ошибка запроса', error)
+    }
 
     if (registerResult.status !== 200) {
         const error = await registerResult.json()

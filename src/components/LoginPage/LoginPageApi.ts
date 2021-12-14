@@ -11,16 +11,20 @@ export async function login (e) {
     const password = passwordInput.value
 
 
-
-    const loginResult = (await fetch(`${host}/auth/signin`, {
-        method: 'POST',
-        credentials: 'include',
-        mode: 'cors',
-        headers: {
-            'content-type': 'application/json',
-        },
-        body: JSON.stringify({ login, password }),
-    }))
+    let loginResult
+    try {
+        loginResult = (await fetch(`${host}/auth/signin`, {
+            method: 'POST',
+            credentials: 'include',
+            mode: 'cors',
+            headers: {
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify({ login, password }),
+        }))
+    }catch(error) {
+        console.log('Ошибка запроса', error)
+    }
 
     if (loginResult.status !== 200) {
         const error = await loginResult.json()

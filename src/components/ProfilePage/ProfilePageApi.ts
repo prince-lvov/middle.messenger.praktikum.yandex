@@ -12,22 +12,27 @@ export async function save (e) {
     const phone = (document.getElementsByName('phone')[0] as HTMLInputElement).value
     const display_name = (document.getElementsByName('display_name')[0] as HTMLInputElement).value
 
-    const saveResult = (await fetch(`${host}/user/profile`, {
-        method: 'PUT',
-        credentials: 'include',
-        mode: 'cors',
-        headers: {
-            'content-type': 'application/json',
-        },
-        body: JSON.stringify({
-            first_name,
-            second_name,
-            display_name,
-            login,
-            email,
-            phone
-        }),
-    }))
+    let saveResult
+    try {
+        saveResult = (await fetch(`${host}/user/profile`, {
+            method: 'PUT',
+            credentials: 'include',
+            mode: 'cors',
+            headers: {
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify({
+                first_name,
+                second_name,
+                display_name,
+                login,
+                email,
+                phone
+            }),
+        }))
+    }catch(error) {
+        console.log('Ошибка запроса', error)
+    }
 
     if (saveResult.status !== 200) {
         const error = await saveResult.json()
@@ -48,11 +53,16 @@ export async function save (e) {
 }
 
 export async function getDataProfile () {
-    const userResult = await fetch(`${host}/auth/user`, {
-        method: 'GET',
-        mode: 'cors',
-        credentials: 'include',
-    })
+    let userResult
+    try {
+        userResult = await fetch(`${host}/auth/user`, {
+            method: 'GET',
+            mode: 'cors',
+            credentials: 'include',
+        })
+    }catch(error) {
+        console.log('Ошибка запроса', error)
+    }
 
     state.user = await userResult.json()
 
@@ -63,7 +73,15 @@ export async function loadAvatar (e) {
     let file = e.target.files[0]
     let formData = new FormData()
     formData.append('avatar', file)
-    const response = await fetch(host + '/user/profile/avatar', { method: 'PUT', mode: 'cors', credentials: 'include', body: formData })
+    let response
+    try{
+        response = await fetch(host + '/user/profile/avatar', {
+            method: 'PUT', mode: 'cors', credentials: 'include', body: formData
+        })
+    }catch(error) {
+        console.log('Ошибка запроса', error)
+    }
+
     const result = await response.json()
 
     const user = state.user as any
@@ -73,13 +91,18 @@ export async function loadAvatar (e) {
 }
 
 export async function logout () {
-    const logoutResult = (await fetch(`${host}/auth/logout`, {
-        method: 'POST',
-        credentials: 'include',
-        headers: {
-            'content-type': 'application/json',
-        },
-    }))
+    let logoutResult
+    try {
+        logoutResult = (await fetch(`${host}/auth/logout`, {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+                'content-type': 'application/json',
+            },
+        }))
+    }catch(error) {
+        console.log('Ошибка запроса', error)
+    }
 
     if (logoutResult.status !== 200) {
         const error = await logoutResult.json()

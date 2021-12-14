@@ -21,16 +21,16 @@ export async function create_chat (e: Event) {
 export async function postChats (title) {
 
     const HTTP = new HttpTransport()
-    HTTP.post(`${host}/chats`, { data: JSON.stringify({ title: title }) })
-        .then(
-            (data: XMLHttpRequest) => {
-                if (data.status !== 200) {
-                    alert(data.response.reason)
-                } else {
+    new Promise<void>((resolve, reject) => {
+        HTTP.post(`${host}/chats`, { data: JSON.stringify({ title: title }) })
+            .then((data: XMLHttpRequest) => {
                     console.log(data.response)
                 }
-            }
-        )
+            ).catch((r) => {
+            console.log('Упал с ошибкой', r)
+            reject()
+        })
+    })
 }
 
 export async function selectChat (chat: Chat) {
@@ -44,11 +44,16 @@ export async function selectChat (chat: Chat) {
 
     state.currentChat = chat
 
-    const tokenResult = await fetch(`${host}/chats/token/${chat.id}`, {
-        method: 'POST',
-        mode: 'cors',
-        credentials: 'include',
-    })
+    let tokenResult
+    try {
+        tokenResult = await fetch(`${host}/chats/token/${chat.id}`, {
+            method: 'POST',
+            mode: 'cors',
+            credentials: 'include',
+        })
+    }catch(error) {
+        console.log('Ошибка запроса', error)
+    }
 
     const token = await tokenResult.json()
 
@@ -88,8 +93,7 @@ export async function getChats () {
     const HTTP = new HttpTransport()
     return new Promise<void>((resolve, reject) => {
         HTTP.get(`${host}/chats`, {})
-            .then(
-                (data: XMLHttpRequest) => {
+            .then((data: XMLHttpRequest) => {
                     state.chats = data.response
                     resolve()
                 }
@@ -103,17 +107,14 @@ export async function getUser () {
     const HTTP = new HttpTransport()
     return new Promise<void> ((resolve, reject) => {
         HTTP.get(`${host}/auth/user`, {})
-            .then(
-                (data: XMLHttpRequest) => {
-                    if (data.status !== 200) {
-                        alert(data.response.reason)
-                        reject()
-                    } else {
+            .then((data: XMLHttpRequest) => {
                         state.user = data.response
                         resolve()
-                    }
                 }
-            )
+            ).catch((r) => {
+            console.log('Упал с ошибкой', r)
+            reject()
+        })
     })
 }
 
@@ -142,16 +143,20 @@ export async function AddOrDeleteUserToChat (e: Event, choice: string) {
         login = loginInput.value
     }
 
-
-    const SearchUserByLogin = (await fetch(`${host}/user/search`, {
-        method: 'POST',
-        mode: 'cors',
-        credentials: 'include',
-        headers: {
-            'content-type': 'application/json',
-        },
-        body: JSON.stringify({ login }),
-    }))
+    let SearchUserByLogin
+    try{
+        SearchUserByLogin = (await fetch(`${host}/user/search`, {
+            method: 'POST',
+            mode: 'cors',
+            credentials: 'include',
+            headers: {
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify({ login }),
+        }))
+    }catch(error) {
+        console.log('Ошибка запроса', error)
+    }
 
     if (SearchUserByLogin.status !== 200) {
         const error = await SearchUserByLogin.json()
@@ -203,11 +208,17 @@ export async function AddOrDeleteUserToChat (e: Event, choice: string) {
 
 async function WhoInThisChat (chatId) {
 
-    const userResult = await fetch(`${host}/chats/${chatId}/users`, {
-        method: 'GET',
-        mode: 'cors',
-        credentials: 'include',
-    })
+    let userResult
+    try{
+        userResult = await fetch(`${host}/chats/${chatId}/users`, {
+            method: 'GET',
+            mode: 'cors',
+            credentials: 'include',
+        })
+    }catch(error) {
+        console.log('Ошибка запроса', error)
+    }
+
 
     state.usersInChatAlready = await userResult.json()
     state.OnlyUsersInChatAlready = ''
