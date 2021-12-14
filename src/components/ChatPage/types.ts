@@ -15,3 +15,11 @@ export type User = {
     phone: string,
     avatar: string,
 }
+
+export type Message = {
+    content: string,
+    id: number,
+    time: string,
+    type: string,
+    user_id: number
+}

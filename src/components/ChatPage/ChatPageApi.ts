@@ -87,7 +87,7 @@ export async function getData () {
 export async function getChats () {
     const HTTP = new HttpTransport()
     return new Promise<void>((resolve, reject) => {
-        HTTP.get(`${host}/chats2`, {})
+        HTTP.get(`${host}/chats`, {})
             .then(
                 (data: XMLHttpRequest) => {
                     state.chats = data.response
@@ -200,7 +200,6 @@ async function WhoInThisChat (chatId) {
     })
 
     state.usersInChatAlready = await userResult.json()
-
     state.OnlyUsersInChatAlready = ''
     for (let i in state.usersInChatAlready) {
         state.OnlyUsersInChatAlready += state.usersInChatAlready[i].first_name + '; ';
