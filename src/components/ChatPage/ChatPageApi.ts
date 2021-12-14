@@ -14,8 +14,9 @@ export async function create_chat (e: Event) {
         title = titleInput.value
     }
 
-    postChats(title).then(getChats).then(() => { Router.get().to('/messenger') })
-
+    postChats(title).then(getChats).then(() => {
+        Router.get().to('/messenger')
+    })
 }
 export async function postChats (title) {
 
@@ -75,13 +76,12 @@ export async function sendMessage (e: Event) {
 }
 export async function getData () {
     return new Promise<void> ((resolve, reject) => {
-        getUser().then(getChats).then(function () {
+        getUser().then(getChats).then(() => {
                 Router.get().to('/messenger')
                 resolve()
             }
         )
     })
-
 }
 
 export async function getChats () {

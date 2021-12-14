@@ -6,7 +6,7 @@ import {getData, selectChat} from "../ChatPage/ChatPageApi";
 
 export default function ProfilePage () {
 
-    if (!state.user.id) {
+    if (state.user.id === -1) {
         getDataProfile().then(() => {
             Router.get().to('/settings')
         })
@@ -28,8 +28,7 @@ export default function ProfilePage () {
                             selectChat(JSON.parse(localStorage.currentChat))
                         }
                     })
-                    //Router.get().to('/messenger')
-                } },
+                }},
             VDom.createElement('div', { className: 'arrow' },
                 VDom.createElement('img', { src: require('../../images/back-arrow.svg'), alt: '' }))
         ),

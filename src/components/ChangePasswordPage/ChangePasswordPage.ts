@@ -6,7 +6,7 @@ import Router from '../../my_core/router'
 
 export default function ChangePasswordPage () {
 
-    if (!state.user.id) {
+    if (state.user.id === -1) {
         getDataProfile().then(() => {
             Router.get().to('/change_password')
         })

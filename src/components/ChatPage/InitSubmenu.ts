@@ -35,10 +35,12 @@ export function InitSubmenu () {
                 const title = actionFormValues[action].formTitle
                 const buttonValue = actionFormValues[action].buttonValue
 
-                const popup: any = document.querySelector('.chat-action-popup')
-                popup.querySelector('.h2').innerText = title
-                popup.getElementsByTagName('button')[0].textContent = buttonValue
-                popup.classList.add('open')
+                const popup: HTMLElement | null = document.querySelector('.chat-action-popup')
+                if (popup) {
+                    popup.querySelector('.h2').innerText = title
+                    popup.getElementsByTagName('button')[0].textContent = buttonValue
+                    popup.classList.add('open')
+                }
 
                 if (triggerEl) {
                     triggerEl.classList.remove('open')

@@ -1,24 +1,33 @@
 import { VDom } from './VDom'
-import {Chat} from "../components/ChatPage/types";
+import {Chat, User} from "../components/ChatPage/types";
+import WebSocket from "./WebSocket";
 
 export const state: {
     chats: Chat[],
-    user: any,
+    user: User,
     messages: any[],
     currentChat: any,
     userInChat: any,
     OnlyUsersInChatAlready: any,
     usersInChatAlready: any,
-    webSocket: any
+    webSocket?: WebSocket
 } = {
     chats: [],
-    user: {},
+    user: {
+        id: -1,
+        first_name: '',
+        second_name: '',
+        display_name: '',
+        login: '',
+        email: '',
+        phone: '',
+        avatar: '',
+    },
     messages: [],
     currentChat: {},
     userInChat:{},
     OnlyUsersInChatAlready: '',
     usersInChatAlready: null,
-    webSocket: null
 }
 
 export function renderView (state, page) {
