@@ -75,7 +75,12 @@ class HttpTransport {
             });
 
             xhr.onload = function() {
-                resolve(xhr);
+                if (xhr.status !== 200) {
+                    alert(xhr.response.reason)
+                    reject(xhr.status)
+                } else {
+                    resolve(xhr);
+                }
             };
 
             xhr.onabort = reject;

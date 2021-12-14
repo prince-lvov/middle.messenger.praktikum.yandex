@@ -1,6 +1,5 @@
 import { VDom } from '../../my_core/VDom'
 import { ChoiceAction } from './ChatPageApi'
-import { InitSubmenu } from './InitSubmenu'
 
 export function Popup () {
     return VDom.createElement('div', { className: 'chat-action-popup' },
@@ -15,6 +14,7 @@ export function Popup () {
                 VDom.createElement('div', { className: 'modal-bottom' },
                     VDom.createElement('button', { className: 'choice_button', name: 'login', onclick: ChoiceAction }),
                     VDom.createElement('div', { className: 'cancel', onclick: () => {
+                            const popup: HTMLElement | null = document.querySelector('.chat-action-popup')
                             if (popup) {
                               popup.classList.remove('open')
                             }

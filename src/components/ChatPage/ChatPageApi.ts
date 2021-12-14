@@ -72,7 +72,7 @@ export async function sendMessage (e: Event) {
         message = messageInput.value
     }
 
-    state.webSocket.send(message)
+    state.webSocket?.send(message)
 }
 export async function getData () {
     return new Promise<void> ((resolve, reject) => {
@@ -87,18 +87,16 @@ export async function getData () {
 export async function getChats () {
     const HTTP = new HttpTransport()
     return new Promise<void>((resolve, reject) => {
-        HTTP.get(`${host}/chats`, {})
+        HTTP.get(`${host}/chats2`, {})
             .then(
                 (data: XMLHttpRequest) => {
-                    if (data.status !== 200) {
-                        alert(data.response.reason)
-                        reject()
-                    } else {
-                        state.chats = data.response
-                        resolve()
-                    }
+                    state.chats = data.response
+                    resolve()
                 }
-            )
+            ).catch((r) => {
+                console.log('Упал с ошибкой', r)
+                reject()
+        })
     })
 }
 export async function getUser () {
@@ -161,19 +159,25 @@ export async function AddOrDeleteUserToChat (e: Event, choice: string) {
     state.userInChat = SearchUserByLoginResult[0]
 
     const chatId = state.currentChat.id
+    let addUsersToChat
 
-    const addUsersToChat = (await fetch(`${host}/chats/users`, {
-        method: `${choice}`,
-        mode: 'cors',
-        credentials: 'include',
-        headers: {
-            'content-type': 'application/json',
-        },
-        body: JSON.stringify({
-            users,
-            chatId
-        }),
-    }))
+    try {
+         addUsersToChat = (await fetch(`${host}/chats/users`, {
+            method: `${choice}`,
+            mode: 'cors',
+            credentials: 'include',
+            headers: {
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify({
+                users,
+                chatId
+            }),
+        }))
+    }catch(error) {
+        console.log('Ошибка запроса', error)
+    }
+
 
     if (addUsersToChat.status !== 200) {
         const error = await addUsersToChat.json()

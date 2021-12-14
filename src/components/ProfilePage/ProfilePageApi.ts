@@ -37,10 +37,10 @@ export async function save (e) {
 
     alert('Успешно сохранено!')
 
-    const user = state.user as any
+    const user = state.user
 
     user.first_name = first_name
-    user.seconds_name = second_name
+    user.second_name = second_name
     user.display_name = display_name
     user.login = login
     user.email = email

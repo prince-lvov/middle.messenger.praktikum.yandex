@@ -37,7 +37,10 @@ export function InitSubmenu () {
 
                 const popup: HTMLElement | null = document.querySelector('.chat-action-popup')
                 if (popup) {
-                    popup.querySelector('.h2').innerText = title
+                    const titleElement: HTMLElement | null = popup.querySelector('.h2')
+                    if (titleElement) {
+                        titleElement.innerText = title
+                    }
                     popup.getElementsByTagName('button')[0].textContent = buttonValue
                     popup.classList.add('open')
                 }

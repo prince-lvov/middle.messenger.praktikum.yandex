@@ -1,6 +1,6 @@
 import { state } from './core'
 
-let interval = null
+let interval: NodeJS.Timer | null
 const rootUrl = 'wss://ya-praktikum.tech/ws/chats/:userId/:chatId/:token'
 
 class WebSocketService {
@@ -54,7 +54,7 @@ class WebSocketService {
         
         if (state.webSocket) state.webSocket.socket.close()
         if (interval) clearInterval(interval)
-        //@ts-ignore
+
         interval = setInterval(() => { this.socket.send(pingMessage) }, 10000)
     }
 
