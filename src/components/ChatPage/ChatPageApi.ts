@@ -2,7 +2,7 @@ import { state } from '../../my_core/core'
 import Router from '../../my_core/router'
 import WebSocket from '../../my_core/WebSocket'
 import HttpTransport from '../../my_core/HttpTransport'
-import { Chat } from './types'
+import { Chat, User } from './types'
 
 const host = 'https://ya-praktikum.tech/api/v2'
 
@@ -119,8 +119,11 @@ export async function getUser () {
 
 export async function ChoiceAction (e: Event) {
     e.preventDefault()
-    //@ts-ignore
-    const choiceButton: string = document.querySelector('.choice_button').textContent
+    const choiceButtonElement = document.querySelector('.choice_button')
+    let choiceButton
+    if (choiceButtonElement) {
+        choiceButton = choiceButtonElement.textContent
+    }
     if (choiceButton === 'Добавить') {
         await AddOrDeleteUserToChat(e, 'PUT')
     } else {
@@ -131,10 +134,14 @@ export async function ChoiceAction (e: Event) {
 
 export async function AddOrDeleteUserToChat (e: Event, choice: string) {
     e.preventDefault()
-    //@ts-ignore
-    const loginDiv: HTMLElement = document.querySelector('.chat-action-popup')
-    const loginInput: HTMLInputElement = loginDiv.getElementsByTagName('input')[0]
-    const login: string = loginInput.value
+
+    const loginDiv: HTMLElement | null = document.querySelector('.chat-action-popup')
+    let login: string = ''
+    if (loginDiv) {
+        const loginInput: HTMLInputElement | null = loginDiv.getElementsByTagName('input')[0]
+        login = loginInput.value
+    }
+
 
     const SearchUserByLogin = (await fetch(`${host}/user/search`, {
         method: 'POST',
@@ -152,9 +159,9 @@ export async function AddOrDeleteUserToChat (e: Event, choice: string) {
         return
     }
 
-    const SearchUserByLoginResult = await SearchUserByLogin.json()
-    const users = []
-    //@ts-ignore
+    const SearchUserByLoginResult: User[] = await SearchUserByLogin.json()
+    const users: number[] = []
+
     users.push(SearchUserByLoginResult[0].id)
     state.userInChat = SearchUserByLoginResult[0]
 
@@ -184,8 +191,11 @@ export async function AddOrDeleteUserToChat (e: Event, choice: string) {
         alert(error.reason)
         return
     }
-    //@ts-ignore
-    document.querySelector('.chat-action-popup').classList.remove('open')
+
+    const popup = document.querySelector('.chat-action-popup')
+    if (popup) {
+        popup.classList.remove('open')
+    }
 
     await selectChat(state.currentChat)
 

@@ -1,11 +1,14 @@
 export function InitSubmenu () {
+    interface FooBar extends HTMLLIElement {
+        dataAction ?: string
+    }
 
     const triggerEl = document.querySelector('.chat-menu')
     if (triggerEl) {
         triggerEl.classList.toggle('open')
     }
 
-    const actionFormValues: { [code: string]: any} = {
+    const actionFormValues = {
         addUser: {
             formTitle: 'Добавить пользователя',
             buttonValue: 'Добавить'
@@ -20,14 +23,17 @@ export function InitSubmenu () {
         }
     }
 
-    //@ts-ignore
-    const children = document.querySelector('.submenu').querySelectorAll('li')
+    const childrenElement = document.querySelector('.submenu')
+    let children
+    if (childrenElement) {
+        children = childrenElement.querySelectorAll('li')
+    }
     const actionTriggerEls = Array.from(children)
 
     if (actionTriggerEls !== null) {
-        actionTriggerEls.forEach((actionTrigger:any) => {
+        actionTriggerEls.forEach((actionTrigger: FooBar) => {
             actionTrigger.addEventListener('click', () => {
-                const action: string = actionTrigger.dataAction
+                const action: string | undefined = actionTrigger.dataAction
                 const availableActions = Object.keys(actionFormValues)
                 if (!action || !availableActions.includes(action)) {
                     return true
