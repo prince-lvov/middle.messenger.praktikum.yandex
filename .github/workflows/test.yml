@@ -25,4 +25,4 @@ jobs:
       #Copy to Yandex.Cloud
       - run: rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete . admroot@217.28.231.6:/home/admroot/snake/
       #Deploy
-      - run: ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no admroot@217.28.231.6 "cd snake/ && npm i && npm run start"
+      - run: ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no admroot@217.28.231.6 "cd snake/ && npm i && npm run start &"
