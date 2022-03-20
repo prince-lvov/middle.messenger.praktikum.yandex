@@ -8,7 +8,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, linux, x64]
     strategy:
       matrix:
         node-version: [14.18.0]
@@ -17,12 +17,13 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
+      - run: npm ci
       #Setup key
-      - run: set -eu
-      - run: mkdir "$HOME/.ssh"
-      - run: echo "${{ secrets.key }}" > "$HOME/.ssh/key"
-      - run: chmod 600 "$HOME/.ssh/key"
+      #- run: set -eu
+      #- run: mkdir "$HOME/.ssh"
+      #- run: echo "${{ secrets.key }}" > "$HOME/.ssh/key"
+      #- run: chmod 600 "$HOME/.ssh/key"
       #Copy to Yandex.Cloud
-      - run: rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete . admroot@217.28.231.6:/home/admroot/snake/
+      #- run: rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete . admroot@217.28.231.6:/home/admroot/snake/
       #Deploy
-      - run: ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no admroot@217.28.231.6 "cd snake/ && npm i && npm run start &"
+      #- run: ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no admroot@217.28.231.6 "cd snake/ && npm i && npm run start &"
