@@ -23,4 +23,5 @@ jobs:
       - run: echo "${{ secrets.key }}" > "$HOME/.ssh/key"
       - run: chmod 600 "$HOME/.ssh/key"
       #Copy to Yandex.Cloud
+      - run: cat "$HOME/.ssh/key"
       - run: rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no" . admroot@217.28.231.6:/home/admroot/snake/
