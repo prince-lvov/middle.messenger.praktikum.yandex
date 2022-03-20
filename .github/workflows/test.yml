@@ -24,4 +24,4 @@ jobs:
       - run: chmod 600 "$HOME/.ssh/key"
       #Copy to Yandex.Cloud
       - run: ls -ahl
-      - run: rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no" . admroot@217.28.231.6:/home/admroot/snake/
+      - run: rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete . admroot@217.28.231.6:/home/admroot/snake/
